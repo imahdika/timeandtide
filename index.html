@@ -91,8 +91,8 @@ html[lang="ar"] .brand h1{font-size:clamp(38px,5.6vw,68px)}
 .nowbox .clock{font-family:var(--display);font-size:clamp(40px,5vw,60px);font-weight:700;line-height:.95}
 .nowbox .dayl{font-weight:600}
 .nowbox .next{color:var(--ink-2);font-size:14px}
-.topbar{display:flex;justify-content:flex-end;margin-bottom:6px}
-.langbtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--chip-edge);background:var(--chip);border-radius:999px;padding:6px 14px;font-weight:700;cursor:pointer;font-size:14px}
+.topbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:6px}
+.langbtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--chip-edge);background:var(--chip);border-radius:999px;padding:6px 14px;font-weight:700;cursor:pointer;font-size:14px;text-decoration:none;color:inherit}
 .langbtn .ar{font-size:15px}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-edge);white-space:nowrap}
 .pill.official{color:var(--good);background:var(--good-soft);border-color:transparent}
@@ -271,6 +271,17 @@ html[lang="ar"] .active .big{font-family:var(--arabic);font-size:21px;font-weigh
 .news time{font-weight:700;color:var(--muted);font-size:12.5px;padding-top:2px}
 .news a{font-weight:600}
 
+/* ===== SUPPORT ===== */
+.sup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.sup-card{display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:20px;background:var(--chip);border:1px solid var(--chip-edge)}
+.sup-card.give{background:var(--accent-soft);border-color:var(--accent)}
+.sup-card .phone{font-family:var(--display);font-size:clamp(40px,5.4vw,58px);font-weight:800;line-height:1;margin-top:4px;user-select:all;-webkit-user-select:all;text-align:start}
+.sup-card .phone .cc{font-weight:600;color:var(--muted);font-size:.55em;vertical-align:.25em}
+html[dir="rtl"] .sup-card .phone{text-align:right}
+.sup-actions{display:flex;flex-wrap:wrap;gap:8px}
+.sup-actions a.btn{text-decoration:none}
+@media (max-width:760px){.sup-grid{grid-template-columns:1fr}}
+
 /* ===== SOURCES ===== */
 .sources{font-size:13.5px}
 .sources ul{columns:2 320px;column-gap:32px;margin:12px 0 0;padding-inline-start:18px}
@@ -308,7 +319,7 @@ html[lang="ar"] .active .big{font-family:var(--arabic);font-size:21px;font-weigh
 
 <main class="page">
   <header class="glass board" id="board">
-    <div class="topbar"><button class="langbtn" id="langBtn" type="button"></button></div>
+    <div class="topbar"><a class="langbtn" href="#support" data-t="supLink"></a><button class="langbtn" id="langBtn" type="button"></button></div>
     <div class="board-top">
       <div class="brand">
         <h1 id="brandTitle"></h1>
@@ -426,6 +437,36 @@ html[lang="ar"] .active .big{font-family:var(--arabic);font-size:21px;font-weigh
     </div>
   </section>
 
+  <section class="glass support" id="support" aria-labelledby="supportH">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-t="supEyebrow"></div><h2 id="supportH" data-t="supTitle"></h2></div>
+      <p data-t="supDesc"></p>
+    </div>
+    <div class="sup-grid">
+      <div class="sup-card give">
+        <span class="pill official" style="align-self:flex-start">BenefitPay</span>
+        <h3 data-t="donTitle"></h3>
+        <p class="muted" data-t="donBody"></p>
+        <div class="phone num" dir="ltr"><span class="cc">+973</span> <span class="pn" id="donNum">3666 7009</span></div>
+        <div class="sup-actions">
+          <button class="btn" type="button" data-copy="36667009" data-t="copyNum"></button>
+        </div>
+        <p class="subnote" data-t="donSteps"></p>
+      </div>
+      <div class="sup-card">
+        <span class="pill est" style="align-self:flex-start" data-t="inqPill"></span>
+        <h3 data-t="inqTitle"></h3>
+        <p class="muted" data-t="inqBody"></p>
+        <div class="phone num" dir="ltr"><span class="cc">+973</span> <span class="pn" id="inqNum">3666 7009</span></div>
+        <div class="sup-actions">
+          <a class="btn" href="https://wa.me/97336667009" target="_blank" rel="noopener" data-t="waBtn"></a>
+          <a class="btn ghost" href="tel:+97336667009" data-t="callBtn"></a>
+          <button class="btn ghost" type="button" data-copy="+97336667009" data-t="copyNum"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="glass sources">
     <h3 data-t="srcTitle"></h3>
     <ul id="srcList"></ul>
@@ -471,7 +512,20 @@ const STR = {
   newsTitle: ["Fishing news", "أخبار الصيد"],
   newsNote: ["Checked on 27 Sep 2026: the latest SCE news items (25 Sep) contain no new fishing notice.", "تمت المراجعة في 27 سبتمبر 2026: آخر أخبار المجلس (25 سبتمبر) لا تتضمن قراراً جديداً بشأن الصيد."],
   newsLink: ["Open SCE news ↗", "أخبار المجلس الأعلى للبيئة ↗"],
-  srcTitle: ["Where the numbers come from", "مصادر البيانات"]
+  srcTitle: ["Where the numbers come from", "مصادر البيانات"],
+  supLink: ["Support", "ادعم الموقع"],
+  supEyebrow: ["Free for every fisher in Bahrain", "مجاني لكل صيادي البحرين"],
+  supTitle: ["Support & contact", "الدعم والتواصل"],
+  supDesc: ["Donations pay for keeping the tides, forecasts and fish calendar up to date.", "التبرعات تساعد على تحديث المد والجزر والتوقعات وتقويم الأسماك باستمرار."],
+  donTitle: ["Donate with BenefitPay", "تبرّع عبر بنفت باي"],
+  donBody: ["If this site helped you plan a trip or land a catch, any amount helps keep it running.", "إذا ساعدك الموقع في التخطيط لطلعة أو في صيدك، فأي مبلغ يساعد على استمراره."],
+  donSteps: ["In BenefitPay, send money to this mobile number. Thank you!", "في تطبيق بنفت باي، حوّل المبلغ إلى رقم الهاتف هذا. شكراً لدعمك!"],
+  inqPill: ["Inquiries", "استفسارات"],
+  inqTitle: ["Questions, corrections or ideas", "أسئلة أو تصحيحات أو اقتراحات"],
+  inqBody: ["Spotted a wrong fish season or tide time? Call or send a WhatsApp message.", "لاحظت خطأ في موسم سمكة أو وقت مد؟ اتصل أو أرسل رسالة واتساب."],
+  waBtn: ["WhatsApp", "واتساب"],
+  callBtn: ["Call", "اتصال"],
+  copyNum: ["Copy number", "نسخ الرقم"]
 };
 const MON = { en: ["January","February","March","April","May","June","July","August","September","October","November","December"], ar: ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"] };
 const WD = { en: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], ar: ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"] };
@@ -1283,6 +1337,11 @@ async function fishAI(id, out, btn) {
   } finally { btn.disabled = !aiReady; }
 }
 function disableAI(msg) { aiReady = false; aiMsg = msg; setAIState(); document.querySelectorAll(".ai-fish").forEach(b => b.hidden = true); document.querySelectorAll(".mf").forEach(b => b.disabled = true); $("calTapNote").hidden = true; }
+document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", () => {
+  const txt = btn.dataset.copy; const done = () => { btn.textContent = L("Copied", "تم النسخ"); setTimeout(() => { btn.textContent = L(STR.copyNum[0], STR.copyNum[1]); }, 1800); };
+  const fallback = () => { const el = btn.closest(".sup-card").querySelector(".pn"); const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = L("Selected. Copy it now", "تم التحديد، انسخه الآن"); };
+  try { navigator.clipboard.writeText(txt).then(done, fallback); } catch (_) { fallback(); }
+}));
 $("aiGo").addEventListener("click", runPlan);
 $("aiStop").addEventListener("click", () => aiCtl && aiCtl.abort());
 
