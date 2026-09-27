@@ -1,0 +1,1337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Bahrain fishing planner: Mina Salman tides, best fishing times, fish seasons, SCE bans and sizes. English and Arabic.">
+<meta name="theme-color" content="#1a93a8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a7a90'/%3E%3Cpath d='M6 38c6-8 12-8 18 0s12 8 18 0 12-8 16-2' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='18' r='6' fill='%23f4c665'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Fishing Time &amp; Tide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --sky1:#9fdce8; --sky2:#e6f7f3; --sea1:#4dbdc8; --sea2:#1a93a8; --sea3:#0f7187;
+  --glow:rgba(255,238,196,.95); --orb:#fffbea; --glitter:255,255,255;
+  --glass:rgba(238,250,251,.72); --glass-hi:rgba(246,253,253,.82); --edge:rgba(255,255,255,.8);
+  --shadow:rgba(3,52,68,.20); --chip:rgba(255,255,255,.55); --chip-edge:rgba(3,44,56,.10);
+  --ink:#032c38; --ink-2:#1f4b57; --muted:#33606b; --line:rgba(3,44,56,.14);
+  --accent:#e0a42a; --accent-ink:#855700; --accent-soft:rgba(240,176,52,.30);
+  --good:#0f7d57; --good-soft:rgba(15,125,87,.14);
+  --warn:#a95f05; --warn-soft:rgba(169,95,5,.15);
+  --bad:#b8352b; --bad-soft:rgba(184,53,43,.13);
+  --tide:#0a7a90; --tide-fill:rgba(10,122,144,.17); --night:rgba(3,44,56,.075);
+  --display:"Big Shoulders Display","IBM Plex Sans Arabic","Arial Narrow",Impact,sans-serif;
+  --body:"Instrument Sans","IBM Plex Sans Arabic","Segoe UI",system-ui,-apple-system,sans-serif;
+  --arabic:"IBM Plex Sans Arabic","Noto Sans Arabic","Geeza Pro",Tahoma,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --sky1:#051628; --sky2:#11324b; --sea1:#0b3450; --sea2:#062137; --sea3:#010a16;
+    --glow:rgba(190,214,255,.42); --orb:#f4f1e2; --glitter:214,230,255;
+    --glass:rgba(6,26,42,.62); --glass-hi:rgba(8,32,50,.74); --edge:rgba(170,225,240,.17);
+    --shadow:rgba(0,0,0,.42); --chip:rgba(255,255,255,.06); --chip-edge:rgba(200,235,245,.12);
+    --ink:#e9f7fb; --ink-2:#c1dde6; --muted:#8bb2be; --line:rgba(200,235,245,.13);
+    --accent:#f4c665; --accent-ink:#f4c665; --accent-soft:rgba(244,198,101,.2);
+    --good:#55d49e; --good-soft:rgba(85,212,158,.14);
+    --warn:#f2ab4c; --warn-soft:rgba(242,171,76,.15);
+    --bad:#ff8272; --bad-soft:rgba(255,130,114,.15);
+    --tide:#63d3e6; --tide-fill:rgba(99,211,230,.16); --night:rgba(0,0,0,.22);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --sky1:#051628; --sky2:#11324b; --sea1:#0b3450; --sea2:#062137; --sea3:#010a16;
+  --glow:rgba(190,214,255,.42); --orb:#f4f1e2; --glitter:214,230,255;
+  --glass:rgba(6,26,42,.62); --glass-hi:rgba(8,32,50,.74); --edge:rgba(170,225,240,.17);
+  --shadow:rgba(0,0,0,.42); --chip:rgba(255,255,255,.06); --chip-edge:rgba(200,235,245,.12);
+  --ink:#e9f7fb; --ink-2:#c1dde6; --muted:#8bb2be; --line:rgba(200,235,245,.13);
+  --accent:#f4c665; --accent-ink:#f4c665; --accent-soft:rgba(244,198,101,.2);
+  --good:#55d49e; --good-soft:rgba(85,212,158,.14);
+  --warn:#f2ab4c; --warn-soft:rgba(242,171,76,.15);
+  --bad:#ff8272; --bad-soft:rgba(255,130,114,.15);
+  --tide:#63d3e6; --tide-fill:rgba(99,211,230,.16); --night:rgba(0,0,0,.22);
+}
+
+*{box-sizing:border-box}
+body{background:var(--sea2);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+html[lang="ar"] body{font-family:var(--arabic);font-size:15.5px;line-height:1.65}
+html[lang="ar"] *{letter-spacing:0!important}
+#sea{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none}
+.page{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:clamp(16px,3vw,32px) 48px;display:flex;flex-direction:column;gap:clamp(16px,2.4vw,26px)}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--edge);border-radius:24px;box-shadow:0 18px 50px -18px var(--shadow),inset 0 1px 0 rgba(255,255,255,.35);padding:clamp(18px,2.6vw,30px)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.01em;line-height:1.05;margin:0;text-wrap:balance}
+h2{font-size:clamp(28px,3.4vw,38px);text-transform:uppercase}
+h3{font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{font-family:var(--arabic);font-weight:700;line-height:1.3}
+html[lang="ar"] h2{font-size:clamp(24px,3vw,32px)}
+html[lang="ar"] h3{font-size:19px}
+p{margin:0}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.ar{font-family:var(--arabic)}
+.ltr{direction:ltr;unicode-bidi:isolate}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px 20px;margin-bottom:18px}
+.sec-head p{max-width:60ch;color:var(--ink-2)}
+
+/* ===== HEADER ===== */
+.board-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px 24px}
+.brand h1{font-size:clamp(44px,6.4vw,82px);text-transform:uppercase;letter-spacing:-.005em}
+html[lang="ar"] .brand h1{font-size:clamp(38px,5.6vw,68px)}
+.brand h1 .amp{color:var(--accent-ink);font-weight:600}
+.brand .where{margin-top:8px;color:var(--ink-2);font-weight:500}
+.nowbox{text-align:end;display:flex;flex-direction:column;gap:2px;align-items:flex-end;margin-inline-start:auto}
+.nowbox .clock{font-family:var(--display);font-size:clamp(40px,5vw,60px);font-weight:700;line-height:.95}
+.nowbox .dayl{font-weight:600}
+.nowbox .next{color:var(--ink-2);font-size:14px}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:6px}
+.langbtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--chip-edge);background:var(--chip);border-radius:999px;padding:6px 14px;font-weight:700;cursor:pointer;font-size:14px}
+.langbtn .ar{font-size:15px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-edge);white-space:nowrap}
+.pill.official{color:var(--good);background:var(--good-soft);border-color:transparent}
+.pill.model{color:var(--warn);background:var(--warn-soft);border-color:transparent}
+.pill.est{color:var(--ink-2);background:var(--line);border-color:transparent}
+.back-today{border:1px solid var(--chip-edge);background:var(--chip);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer;margin-inline-start:8px}
+.tide-wrap{position:relative;margin-top:18px;direction:ltr}
+.tide-wrap svg{display:block;width:100%;height:auto;overflow:visible}
+.tide-wrap svg text{font-family:var(--body);font-variant-numeric:tabular-nums}
+.tip{position:absolute;pointer-events:none;background:var(--glass-hi);border:1px solid var(--edge);border-radius:10px;padding:6px 10px;font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 8px 24px -8px var(--shadow);transform:translate(-50%,-110%);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.tide-events{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:14px}
+.tev{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:14px;background:var(--chip);border:1px solid var(--chip-edge)}
+.tev .k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tev .t{font-family:var(--display);font-size:32px;font-weight:700;line-height:1}
+.tev .h{font-size:13px;color:var(--ink-2)}
+.tev.past{opacity:.55}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 16px;margin-top:18px;border-top:1px solid var(--line)}
+.stat{padding-block:12px 10px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:2px;min-width:0}
+.stat .l{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:var(--display);font-size:28px;font-weight:700;line-height:1.1}
+.stat .s{font-size:13px;color:var(--ink-2);line-height:1.4}
+.src-line{margin-top:12px;font-size:12.5px;color:var(--muted)}
+
+/* ===== ADVICE ===== */
+.advice{background:var(--glass-hi)}
+.best-wrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px 36px;align-items:end}
+.best-range{font-family:var(--display);font-weight:800;font-size:clamp(54px,8.4vw,118px);max-width:100%;line-height:.86;letter-spacing:-.01em;margin-top:8px;white-space:nowrap;direction:ltr;unicode-bidi:isolate}
+html[lang="ar"] .best-range{text-align:right}
+.best-range .dash{color:var(--accent-ink);font-weight:600;padding-inline:.06em}
+.rating{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+.stars{color:var(--accent);font-size:22px;letter-spacing:2px;line-height:1;direction:ltr}
+.stars .off{color:var(--line)}
+.score{font-weight:700;color:var(--ink-2)}
+.why{margin-top:10px;font-size:17px;color:var(--ink-2);max-width:52ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding:0;list-style:none}
+.chip{font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-edge)}
+.chip.good{background:var(--good-soft);color:var(--good);border-color:transparent}
+.chip.slow{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.alt-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.alt{display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.alt .tt{font-family:var(--display);font-size:26px;font-weight:700;white-space:nowrap;direction:ltr}
+.alt .ds{font-size:13.5px;color:var(--ink-2)}
+.alt .sc{font-size:14px;color:var(--accent);letter-spacing:1px;direction:ltr}
+.alt.past{opacity:.5}
+.alt.past .tt{text-decoration:line-through;text-decoration-thickness:2px}
+.advice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 32px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+.advice-grid h3{margin-bottom:12px}
+.fishchips{display:flex;flex-wrap:wrap;gap:8px}
+.fchip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px 6px 12px;border-radius:12px;background:var(--chip);border:1px solid var(--chip-edge);font-weight:600;font-size:14px}
+.fchip.gen{border-style:dashed;border-color:var(--muted);background:transparent}
+.fchip .ar{font-size:15px}
+.sz{font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:2px 6px;border-radius:6px;background:var(--accent-soft);color:var(--accent-ink)}
+.zone-list{display:flex;flex-direction:column;gap:12px}
+.zone .zl{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.zone .zl svg{flex:none}
+.zone .zf{margin-top:4px;font-weight:500}
+.reads{display:flex;flex-direction:column;gap:12px;margin:0;padding:0;list-style:none}
+.reads li{display:grid;grid-template-columns:86px 1fr;gap:10px;font-size:14px;line-height:1.45}
+.reads b{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.subnote{font-size:12.5px;color:var(--muted);margin-top:10px}
+
+/* AI */
+.ai{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+.ai-controls{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:end;margin-top:14px}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.field select{appearance:none;-webkit-appearance:none;background:var(--chip);border:1px solid var(--chip-edge);border-radius:12px;padding-block:9px;padding-inline:12px 34px;max-width:100%;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 17px) 55%,calc(100% - 12px) 55%;background-size:5px 5px;background-repeat:no-repeat;cursor:pointer}
+html[dir="rtl"] .field select{background-position:17px 55%,12px 55%}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:14px;padding:11px 18px;font-weight:700;cursor:pointer;background:var(--ink);color:var(--glass-hi)}
+.btn:hover{filter:brightness(1.1)}
+.btn[disabled]{opacity:.5;cursor:default}
+.btn.ghost{background:var(--chip);color:var(--ink);border:1px solid var(--chip-edge)}
+.btn.small{padding:7px 12px;font-size:13px;border-radius:10px}
+.ai-out{margin-top:18px;padding:18px 20px;border-radius:18px;background:var(--chip);border:1px solid var(--chip-edge);max-width:78ch;font-size:15px;line-height:1.6}
+.ai-out h4{font-family:var(--display);font-size:21px;text-transform:uppercase;letter-spacing:.02em;margin:16px 0 6px}
+html[lang="ar"] .ai-out h4{font-family:var(--arabic);font-size:18px}
+.ai-out h4:first-child{margin-top:0}
+.ai-out ul,.ai-out ol{margin:4px 0 8px;padding-inline-start:20px}
+.ai-out li{margin:3px 0}
+.ai-out p{margin:6px 0}
+.ai-state{font-size:13px;color:var(--muted);margin-top:8px}
+.thinking{display:inline-flex;align-items:center;gap:10px;color:var(--ink-2);font-weight:600}
+.thinking i{width:10px;height:10px;border-radius:50%;background:var(--tide);animation:bob 1.1s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-5px);opacity:1}}
+
+/* ===== WEEK ===== */
+.week-strip{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-inline:-4px;padding-inline:4px}
+.day{scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;text-align:start;border:1px solid var(--chip-edge);background:var(--chip);border-radius:18px;padding:14px;cursor:pointer;color:inherit;transition:transform .15s ease,border-color .15s ease}
+.day:hover{transform:translateY(-2px);border-color:var(--accent)}
+.day.sel{border:2px solid var(--accent);padding:13px}
+.day .dh{display:flex;justify-content:space-between;align-items:start;gap:8px}
+.day .blk,.day .rng,.day .bar,.day .wd,.day .dt{display:block}
+.day .wd{font-family:var(--display);font-size:26px;font-weight:800;text-transform:uppercase;line-height:1}
+html[lang="ar"] .day .wd{font-family:var(--arabic);font-size:20px;font-weight:700}
+.day .dt{font-size:13px;color:var(--muted);font-weight:600}
+.day .mn{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--ink-2);font-weight:600;flex:none}
+.day .rng{font-size:12.5px;color:var(--ink-2)}
+.bar{height:6px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;border-radius:4px;background:var(--tide)}
+.day .win{border-top:1px solid var(--line);padding-top:8px;display:flex;flex-direction:column;gap:6px}
+.day .w1{font-family:var(--display);font-size:22px;font-weight:700;line-height:1;white-space:nowrap;direction:ltr;text-align:start}
+.day .w2{font-size:13px;color:var(--ink-2)}
+.day .ws{font-size:13px;color:var(--accent);letter-spacing:1px;direction:ltr;text-align:start}
+.day .wind{font-size:12.5px;color:var(--muted)}
+.day .src{align-self:flex-start}
+
+/* ===== FISH ===== */
+.tabs{display:inline-flex;gap:4px;padding:4px;border-radius:14px;background:var(--chip);border:1px solid var(--chip-edge)}
+.tabs button{border:0;background:transparent;padding:8px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--glass-hi)}
+.fish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.fcard{display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:20px;background:var(--chip);border:1px solid var(--chip-edge)}
+.fcard .arn{font-family:var(--arabic);font-size:28px;font-weight:600;line-height:1.2}
+.fcard .en{font-weight:700;font-size:15px}
+.fcard .sci{font-style:italic;color:var(--muted);font-size:13px;direction:ltr;text-align:start}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11.5px;font-weight:700;letter-spacing:.05em;padding:3px 8px;border-radius:7px;background:var(--line);color:var(--ink-2);text-transform:uppercase}
+.tag.st-open{background:var(--good-soft);color:var(--good)}
+.tag.st-line{background:var(--warn-soft);color:var(--warn)}
+.tag.st-ban{background:var(--bad-soft);color:var(--bad)}
+.facts{display:grid;grid-template-columns:82px 1fr;gap:6px 12px;margin:0;font-size:14px;line-height:1.45}
+.facts dt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.facts dd{margin:0}
+.fcard .tipline{font-size:13.5px;color:var(--ink-2);border-inline-start:3px solid var(--accent);padding-inline-start:10px}
+.fcard .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;align-items:center}
+.fcard .acts a{font-size:13px;font-weight:600}
+.fcard .ai-out{margin-top:4px;padding:12px 14px;font-size:14px}
+
+/* image calendar */
+.cal-block{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+.allyear{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 16px;border-radius:16px;background:var(--accent-soft);margin-top:14px}
+.allyear .ar{font-size:20px;font-weight:700}
+.mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.mcell{padding:12px 12px 14px;border-radius:16px;background:var(--chip);border:1px solid var(--chip-edge);display:flex;flex-direction:column;gap:8px;min-width:0}
+.mcell.cur{border:2px solid var(--accent);padding:11px 11px 13px}
+.mcell .mh{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.mcell .mn{font-family:var(--display);font-size:22px;font-weight:800;text-transform:uppercase;line-height:1}
+html[lang="ar"] .mcell .mn{font-family:var(--arabic);font-size:17px;font-weight:700}
+.mcell .mi{font-family:var(--display);font-size:22px;font-weight:700;color:var(--muted);line-height:1}
+.mfish{display:flex;flex-wrap:wrap;gap:6px}
+.mf{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--chip-edge);background:var(--glass-hi);border-radius:10px;padding:4px 9px;font-size:13px;font-weight:600;cursor:pointer;color:inherit}
+.mf .ar{font-size:15px}
+.mf.closed{border-color:var(--bad);color:var(--bad)}
+.mf.closed::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--bad)}
+.mf[disabled]{cursor:default}
+.mempty{font-size:12.5px;color:var(--muted)}
+.cal-ai{margin-top:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:22px;height:10px;border-radius:3px}
+
+/* ===== RULES ===== */
+.rules-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px 36px}
+.active{padding:16px 18px;border-radius:18px;background:var(--warn-soft);border:1px solid var(--warn);display:flex;flex-direction:column;gap:6px}
+.active + .active{margin-top:10px}
+.active.full{background:var(--bad-soft);border-color:var(--bad)}
+.active.none{background:var(--good-soft);border-color:var(--good)}
+.active .big{font-family:var(--display);font-size:28px;font-weight:800;text-transform:uppercase;line-height:1.1}
+html[lang="ar"] .active .big{font-family:var(--arabic);font-size:21px;font-weight:700}
+.gantt{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.grow{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;font-size:13.5px}
+.gtrack{position:relative;height:18px;border-radius:5px;background:var(--line);direction:ltr}
+.gseg{position:absolute;top:0;bottom:0;border-radius:5px}
+.gseg.full{background:var(--bad)}
+.gseg.net{background:repeating-linear-gradient(135deg,var(--warn) 0 4px,transparent 4px 8px);border:1px solid var(--warn)}
+.gnow{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.gmonths{display:grid;grid-template-columns:150px 1fr;gap:10px;font-size:10.5px;color:var(--muted);letter-spacing:.08em}
+.gmonths div:last-child{display:grid;grid-template-columns:repeat(12,1fr);direction:ltr}
+.sizes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.size{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:8px 12px;border-radius:12px;background:var(--chip);border:1px solid var(--chip-edge)}
+.size .ar{font-size:15px;font-weight:600}
+.size small{display:block;font-size:11.5px;color:var(--muted);font-family:var(--body)}
+.size b{font-family:var(--display);font-size:22px;white-space:nowrap}
+.news{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column}
+.news li{display:grid;grid-template-columns:100px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.news time{font-weight:700;color:var(--muted);font-size:12.5px;padding-top:2px}
+.news a{font-weight:600}
+
+/* ===== SOURCES ===== */
+.sources{font-size:13.5px}
+.sources ul{columns:2 320px;column-gap:32px;margin:12px 0 0;padding-inline-start:18px}
+.sources li{margin-bottom:6px;break-inside:avoid}
+.sources .method{margin-top:14px;color:var(--ink-2);max-width:90ch}
+
+@media (max-width:900px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .best-wrap{grid-template-columns:1fr}
+  .advice-grid{grid-template-columns:1fr}
+  .rules-grid{grid-template-columns:1fr}
+  .mgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  body{font-size:14.5px}
+  .nowbox{text-align:start;align-items:flex-start;margin-inline-start:0}
+  .glass{border-radius:20px}
+  .grow,.gmonths{grid-template-columns:96px 1fr}
+  .news li{grid-template-columns:1fr;gap:2px}
+  .reads li{grid-template-columns:1fr;gap:2px}
+  .alt{grid-template-columns:1fr auto}
+  .alt .ds{grid-column:1 / -1}
+  .mgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion: reduce){
+  .day{transition:none}
+  .thinking i{animation:none}
+}
+</style>
+</head>
+<body>
+
+
+<canvas id="sea" aria-hidden="true"></canvas>
+
+<main class="page">
+  <header class="glass board" id="board">
+    <div class="topbar"><button class="langbtn" id="langBtn" type="button"></button></div>
+    <div class="board-top">
+      <div class="brand">
+        <h1 id="brandTitle"></h1>
+        <p class="where" data-t="where"></p>
+      </div>
+      <div class="nowbox">
+        <div class="dayl" id="dayLabel"></div>
+        <div class="clock num" id="clock"></div>
+        <div class="next" id="nextTide"></div>
+        <div id="viewCtl"></div>
+      </div>
+    </div>
+    <div class="tide-wrap" id="tideWrap">
+      <svg id="tideSvg" role="img"></svg>
+      <div class="tip" id="tideTip" hidden></div>
+    </div>
+    <div class="tide-events" id="tideEvents"></div>
+    <div class="stats" id="stats"></div>
+    <p class="src-line" id="srcLine"></p>
+  </header>
+
+  <section class="glass advice" id="advice" aria-labelledby="bestLbl">
+    <div class="best-wrap">
+      <div>
+        <div class="eyebrow" id="bestLbl"></div>
+        <div class="best-range num" id="bestRange"></div>
+        <div class="rating"><span class="stars" id="bestStars"></span><span class="score" id="bestScore"></span></div>
+        <p class="why" id="bestWhy"></p>
+        <ul class="chips" id="bestChips"></ul>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:8px"><span data-t="allWin"></span> · <span id="altDay"></span></div>
+        <div class="alt-list" id="altList"></div>
+        <p class="subnote" data-t="winNote"></p>
+      </div>
+    </div>
+    <div class="advice-grid">
+      <div>
+        <h3 id="seasonTitle"></h3>
+        <div class="fishchips" id="seasonNow"></div>
+        <p class="subnote" id="seasonNext"></p>
+      </div>
+      <div>
+        <h3 data-t="typesTitle"></h3>
+        <div class="zone-list" id="zones"></div>
+      </div>
+      <div>
+        <h3 data-t="readTitle"></h3>
+        <ul class="reads" id="reads"></ul>
+      </div>
+    </div>
+    <div class="ai" id="aiBox">
+      <h3 data-t="aiTitle"></h3>
+      <p class="muted" style="margin-top:6px;max-width:75ch" data-t="aiDesc"></p>
+      <div class="ai-controls">
+        <div class="field"><label for="aiStyle" data-t="lblStyle"></label><select id="aiStyle"></select></div>
+        <div class="field"><label for="aiSpot" data-t="lblSpot"></label><select id="aiSpot"></select></div>
+        <button class="btn" id="aiGo" type="button" data-t="aiGo"></button>
+        <button class="btn ghost" id="aiStop" type="button" data-t="aiStop" hidden></button>
+      </div>
+      <div class="ai-out" id="aiOut" hidden></div>
+      <p class="ai-state" id="aiState"></p>
+    </div>
+  </section>
+
+  <section class="glass" aria-labelledby="weekH">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-t="weekEyebrow"></div><h2 id="weekH" data-t="weekTitle"></h2></div>
+      <p data-t="weekDesc"></p>
+    </div>
+    <div class="week-strip" id="week"></div>
+  </section>
+
+  <section class="glass" aria-labelledby="fishH">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-t="fishEyebrow"></div><h2 id="fishH" data-t="fishTitle"></h2></div>
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tabSeason" aria-selected="true" type="button" data-t="tabSeason"></button>
+        <button role="tab" id="tabAll" aria-selected="false" type="button" data-t="tabAll"></button>
+      </div>
+    </div>
+    <div class="fish-grid" id="fishGrid"></div>
+
+    <div class="cal-block">
+      <h3 data-t="calTitle"></h3>
+      <p class="muted" style="margin-top:6px;font-size:13.5px;max-width:80ch" data-t="calCredit"></p>
+      <div class="allyear" id="allYear"></div>
+      <div class="mgrid" id="mgrid"></div>
+      <div class="legend">
+        <span><i style="border:2px solid var(--accent)"></i><span data-t="lgCur"></span></span>
+        <span><i style="border:1px solid var(--bad)"></i><span data-t="lgClosed"></span></span>
+        <span id="calTapNote" data-t="calTap"></span>
+      </div>
+      <div class="ai-out cal-ai" id="calAi" hidden></div>
+    </div>
+  </section>
+
+  <section class="glass" aria-labelledby="rulesH">
+    <div class="sec-head">
+      <div><div class="eyebrow" data-t="rulesEyebrow"></div><h2 id="rulesH" data-t="rulesTitle"></h2></div>
+    </div>
+    <div class="rules-grid">
+      <div>
+        <div id="activeBan"></div>
+        <div class="gantt" id="gantt"></div>
+        <h3 style="margin-top:26px" data-t="sizesTitle"></h3>
+        <p class="muted" style="margin-top:6px;font-size:13.5px" data-t="sizesDesc"></p>
+        <div class="sizes" id="sizes"></div>
+      </div>
+      <div>
+        <h3 data-t="newsTitle"></h3>
+        <ul class="news" id="news"></ul>
+        <p class="subnote"><span data-t="newsNote"></span> <a href="https://www.sce.gov.bh/%D8%A7%D9%84%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1?cms=iQRpheuphYtJ6pyXUGiNql2BCJxlkx93" target="_blank" rel="noopener" data-t="newsLink"></a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="glass sources">
+    <h3 data-t="srcTitle"></h3>
+    <ul id="srcList"></ul>
+    <p class="method" id="method"></p>
+  </footer>
+</main>
+
+<script>
+(() => {
+"use strict";
+/* ================= LANGUAGE ================= */
+const LANG_KEY = "ftt-lang";
+let lang = (() => { try { const s = localStorage.getItem(LANG_KEY); if (s === "ar" || s === "en") return s; } catch (_) {} return (navigator.language || "").toLowerCase().startsWith("ar") ? "ar" : "en"; })();
+const L = (en, ar) => lang === "ar" ? ar : en;
+const STR = {
+  where: ["Mina Salman tide station · Kingdom of Bahrain", "محطة المد في ميناء سلمان · مملكة البحرين"],
+  allWin: ["All tide windows", "كل نوافذ المد والجزر"],
+  winNote: ["Windows run 30–120 min either side of each high and low. The 30 min around the turn (slack water) is left out.", "النوافذ من 30 إلى 120 دقيقة قبل وبعد كل مد وجزر، مع استبعاد نصف الساعة حول انقلاب الماء (الماء الراكد)."],
+  typesTitle: ["Fish types to target", "أنواع الأسماك المستهدفة"],
+  readTitle: ["Reading the water", "قراءة البحر"],
+  aiTitle: ["AI fishing plan", "خطة الصيد بالذكاء الاصطناعي"],
+  aiDesc: ["Claude reads every number on this page, the week ahead, the fish calendar and the rules, then works out a full plan: time range, target fish, method, rig, bait and typical weight.", "يقرأ Claude كل الأرقام في هذه الصفحة، والأسبوع القادم، وتقويم الأسماك، والأنظمة، ثم يضع خطة كاملة: وقت الصيد، والأسماك المستهدفة، والطريقة، والعُدّة، والطُعم، والوزن المعتاد."],
+  lblStyle: ["How you fish", "طريقة الصيد"],
+  lblSpot: ["Fishing from", "مكان الصيد"],
+  aiGo: ["Build my fishing plan", "أنشئ خطة الصيد"],
+  aiStop: ["Stop", "إيقاف"],
+  weekEyebrow: ["Tap a day to load it above", "اضغط على يوم لعرضه في الأعلى"],
+  weekTitle: ["The week's best times", "أفضل أوقات الأسبوع"],
+  weekDesc: ["Strong tides (more water movement) come a day or two after full and new moon; weak tides fall near the quarter moons. The bar shows each day's tide range.", "المد القوي (حركة ماء أكثر) يأتي بعد البدر والمحاق بيوم أو يومين، والمد الضعيف قرب التربيع. الشريط يوضح مدى المد في كل يوم."],
+  fishEyebrow: ["Species guide · Bahrain waters", "دليل الأنواع · مياه البحرين"],
+  fishTitle: ["Fish, methods & weights", "الأسماك وطرق صيدها وأوزانها"],
+  tabSeason: ["In season", "في الموسم"],
+  tabAll: ["All species", "كل الأنواع"],
+  calTitle: ["Fish quality by month", "جودة الأسماك حسب الشهور"],
+  calCredit: ["From the chart “Quality of Bahrain fish by Gregorian month”, prepared and designed by Captain Ahmed bin Isa Al-Busmait (July 2020). Fish whose labels were too small to read in the image are not listed.", "من لوحة «جودة أسماك البحرين حسب الشهور الميلادية»، إعداد وتصميم الربان أحمد بن عيسى البوسميط (يوليو 2020). الأسماك التي لم تكن أسماؤها واضحة في الصورة غير مدرجة."],
+  lgCur: ["This month", "الشهر الحالي"],
+  lgClosed: ["Closed season now (SCE)", "فترة حظر (المجلس الأعلى للبيئة)"],
+  calTap: ["Tap a fish for an AI deep dive.", "اضغط على سمكة لشرح مفصل بالذكاء الاصطناعي."],
+  rulesEyebrow: ["Supreme Council for Environment", "المجلس الأعلى للبيئة"],
+  rulesTitle: ["Bans, sizes & news", "الحظر والأحجام والأخبار"],
+  sizesTitle: ["Minimum legal size", "الحد الأدنى للحجم المسموح"],
+  sizesDesc: ["Resolution No. 3 of 2025. Anything shorter must go back in the sea. Total length in cm.", "القرار رقم (3) لسنة 2025. ما هو أقصر من ذلك يجب إعادته إلى البحر. الطول الكلي بالسنتيمتر."],
+  newsTitle: ["Fishing news", "أخبار الصيد"],
+  newsNote: ["Checked on 27 Sep 2026: the latest SCE news items (25 Sep) contain no new fishing notice.", "تمت المراجعة في 27 سبتمبر 2026: آخر أخبار المجلس (25 سبتمبر) لا تتضمن قراراً جديداً بشأن الصيد."],
+  newsLink: ["Open SCE news ↗", "أخبار المجلس الأعلى للبيئة ↗"],
+  srcTitle: ["Where the numbers come from", "مصادر البيانات"]
+};
+const MON = { en: ["January","February","March","April","May","June","July","August","September","October","November","December"], ar: ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"] };
+const WD = { en: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], ar: ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"] };
+const mon = i => MON[lang][i];
+const monS = i => lang === "ar" ? MON.ar[i] : MON.en[i].slice(0, 3);
+const DIR = { NE: ["NE", "شمالية شرقية"], N: ["N", "شمالية"], E: ["E", "شرقية"], NW: ["NW", "شمالية غربية"], Variable: ["Variable", "متقلبة الاتجاه"] };
+const dirTxt = d => L(DIR[d][0] + (d === "Variable" ? "" : "'ly"), DIR[d][1]);
+
+/* ================= TIME ================= */
+const MIN = 60000, HR = 3600000, DAY = 86400000, OFF = 3 * HR;
+const pad = n => String(n).padStart(2, "0");
+const toMs = (key, hm) => { const [y, m, d] = key.split("-").map(Number); const [H, M] = hm.split(":").map(Number); return Date.UTC(y, m - 1, d, H, M) - OFF; };
+const parts = ms => { const d = new Date(ms + OFF); return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate(), H: d.getUTCHours(), M: d.getUTCMinutes(), wd: d.getUTCDay() }; };
+const keyOf = ms => { const p = parts(ms); return `${p.y}-${pad(p.m)}-${pad(p.d)}`; };
+const hm = ms => { const p = parts(ms); return pad(p.H) + ":" + pad(p.M); };
+const dayStart = key => toMs(key, "00:00");
+const addDays = (key, n) => keyOf(dayStart(key) + n * DAY + 2 * HR);
+const monthOf = key => parts(dayStart(key)).m;
+const longDate = key => { const p = parts(dayStart(key)); return `${WD[lang][p.wd]} ${p.d} ${mon(p.m - 1)} ${p.y}`; };
+const shortDate = key => { const p = parts(dayStart(key)); return `${p.d} ${monS(p.m - 1)}`; };
+const dur = ms => { const m = Math.max(0, Math.round(ms / MIN)); const h = Math.floor(m / 60); return h ? L(`${h} h ${pad(m % 60)} min`, `${h} س ${pad(m % 60)} د`) : L(`${m} min`, `${m} دقيقة`); };
+const rad = Math.PI / 180;
+const norm360 = x => ((x % 360) + 360) % 360;
+
+/* ================= TIDES ================= */
+// Official BMD bulletin for 27 Sep 2026, then Tide-Forecast predictions to 24 Oct 2026.
+const EMB_RAW = [
+  ["2026-09-27","00:10","L",0.7,"bmd"],["2026-09-27","06:15","H",2.6,"bmd"],["2026-09-27","11:50","L",0.7,"bmd"],["2026-09-27","17:50","H",2.6,"bmd"],
+  "2026-09-28 00:16 L .59|06:15 H 2.44|12:34 L .57|18:31 H 2.45",
+  "2026-09-29 00:50 L .56|06:47 H 2.49|13:11 L .52|19:07 H 2.46",
+  "2026-09-30 01:26 L .58|07:22 H 2.50|13:48 L .52|19:47 H 2.42",
+  "2026-10-01 02:04 L .65|08:00 H 2.46|14:29 L .56|20:30 H 2.34",
+  "2026-10-02 02:45 L .76|08:42 H 2.37|15:15 L .65|21:19 H 2.21",
+  "2026-10-03 03:32 L .90|09:31 H 2.25|16:09 L .77|22:19 H 2.07",
+  "2026-10-04 04:31 L 1.05|10:32 H 2.11|17:20 L .88|23:38 H 1.95",
+  "2026-10-05 05:53 L 1.16|11:53 H 2.01|18:50 L .94",
+  "2026-10-06 01:14 H 1.93|07:33 L 1.16|13:28 H 1.99|20:20 L .89",
+  "2026-10-07 02:39 H 2.00|08:57 L 1.06|14:49 H 2.08|21:29 L .78",
+  "2026-10-08 03:41 H 2.12|09:57 L .91|15:50 H 2.19|22:22 L .68",
+  "2026-10-09 04:28 H 2.24|10:45 L .77|16:40 H 2.29|23:05 L .61",
+  "2026-10-10 05:08 H 2.33|11:26 L .66|17:22 H 2.36|23:44 L .58",
+  "2026-10-11 05:44 H 2.39|12:03 L .58|18:01 H 2.39",
+  "2026-10-12 00:19 L .59|06:17 H 2.41|12:37 L .55|18:37 H 2.38",
+  "2026-10-13 00:51 L .64|06:48 H 2.40|13:10 L .55|19:12 H 2.33",
+  "2026-10-14 01:23 L .71|07:19 H 2.35|13:42 L .59|19:46 H 2.25",
+  "2026-10-15 01:53 L .80|07:50 H 2.28|14:15 L .66|20:21 H 2.15",
+  "2026-10-16 02:24 L .90|08:22 H 2.18|14:49 L .76|20:58 H 2.03",
+  "2026-10-17 02:58 L 1.01|08:57 H 2.08|15:29 L .87|21:40 H 1.91",
+  "2026-10-18 03:38 L 1.12|09:38 H 1.96|16:17 L .98|22:35 H 1.80",
+  "2026-10-19 04:31 L 1.21|10:35 H 1.86|17:21 L 1.07|23:53 H 1.74",
+  "2026-10-20 05:47 L 1.27|11:57 H 1.79|18:44 L 1.10",
+  "2026-10-21 01:22 H 1.75|07:21 L 1.25|13:27 H 1.81|20:03 L 1.05",
+  "2026-10-22 02:29 H 1.84|08:36 L 1.14|14:36 H 1.90|21:02 L .95",
+  "2026-10-23 03:17 H 1.96|09:29 L .99|15:26 H 2.01|21:48 L .84",
+  "2026-10-24 03:55 H 2.10|10:12 L .84|16:09 H 2.13|22:28 L .73"
+];
+const EMB = [];
+EMB_RAW.forEach(r => {
+  if (Array.isArray(r)) { EMB.push({ t: toMs(r[0], r[1]), k: r[2], h: r[3], src: r[4] }); return; }
+  const [key, first] = [r.slice(0, 10), r.slice(11)];
+  first.split("|").forEach(s => { const [t, k, h] = s.trim().split(" "); EMB.push({ t: toMs(key, t), k, h: parseFloat(h), src: "model" }); });
+});
+EMB.sort((a, b) => a.t - b.t);
+const COV_A = EMB[0].t, COV_B = EMB[EMB.length - 1].t;
+
+// Harmonic constants fitted to 29 days of Mina Salman predictions (K2 and P1 inferred from S2 and K1).
+const HC = { Z0: 1.4913, M2: [0.6585, 64.74], S2: [0.2232, 121.78], N2: [0.1196, 41.8], K1: [0.0715, 180.54], O1: [0.0495, 109.31], M4: [0.009, 39.9], MS4: [0.0056, 95.05] };
+const J2000 = Date.UTC(2000, 0, 1, 12);
+function harmonicH(ms) {
+  const T = (ms - J2000) / DAY / 36525;
+  const s = 218.3165 + 481267.8813 * T, h = 280.4661 + 36000.7698 * T, p = 83.3535 + 4069.0137 * T, N = (125.0445 - 1934.1363 * T) * rad;
+  const d = new Date(ms); const Tm = 180 + 15 * (d.getUTCHours() + d.getUTCMinutes() / 60 + d.getUTCSeconds() / 3600);
+  const tau = Tm - s + h;
+  const fM2 = 1.0004 - 0.0373 * Math.cos(N) + 0.0002 * Math.cos(2 * N), uM2 = -2.14 * Math.sin(N);
+  const fK1 = 1.0060 + 0.1150 * Math.cos(N) - 0.0088 * Math.cos(2 * N) + 0.0006 * Math.cos(3 * N), uK1 = -8.86 * Math.sin(N) + 0.68 * Math.sin(2 * N) - 0.07 * Math.sin(3 * N);
+  const fO1 = 1.0089 + 0.1871 * Math.cos(N) - 0.0147 * Math.cos(2 * N) + 0.0014 * Math.cos(3 * N), uO1 = 10.80 * Math.sin(N) - 1.34 * Math.sin(2 * N) + 0.19 * Math.sin(3 * N);
+  const fK2 = 1.0241 + 0.2863 * Math.cos(N) + 0.0083 * Math.cos(2 * N) - 0.0015 * Math.cos(3 * N), uK2 = -17.74 * Math.sin(N) + 0.68 * Math.sin(2 * N) - 0.04 * Math.sin(3 * N);
+  const V = {
+    M2: [2 * tau + uM2, fM2], S2: [2 * Tm, 1], N2: [2 * tau - s + p + uM2, fM2], K1: [Tm + h + 90 + uK1, fK1], O1: [Tm - 2 * s + h - 90 + uO1, fO1],
+    M4: [4 * tau + 2 * uM2, fM2 * fM2], MS4: [2 * tau + 2 * Tm + uM2, fM2], K2: [2 * Tm + 2 * h + uK2, fK2], P1: [Tm - h - 90, 1]
+  };
+  let z = HC.Z0;
+  for (const k of ["M2","S2","N2","K1","O1","M4","MS4"]) {
+    const [H, g] = HC[k]; const [v, f] = V[k];
+    z += H * f * Math.cos((v - g) * rad);
+    if (k === "S2") z += H * 0.272 * V.K2[1] * Math.cos((V.K2[0] - g) * rad);
+    if (k === "K1") z += H * 0.331 * Math.cos((V.P1[0] - g) * rad);
+  }
+  return z;
+}
+function harmonicExtremes(a, b) {
+  const out = []; const step = 6 * MIN;
+  let t0 = a - step, h0 = harmonicH(t0), t1 = a, h1 = harmonicH(t1);
+  for (let t2 = a + step; t2 <= b + step; t2 += step) {
+    const h2 = harmonicH(t2);
+    if ((h1 - h0) * (h2 - h1) < 0) {
+      const den = h0 - 2 * h1 + h2; const off = den ? 0.5 * (h0 - h2) / den : 0;
+      const te = t1 + off * step; if (te >= a && te <= b) out.push({ t: te, k: h1 > h0 ? "H" : "L", h: Math.round(harmonicH(te) * 100) / 100, src: "est" });
+    }
+    h0 = h1; h1 = h2; t0 = t1; t1 = t2;
+  }
+  return out;
+}
+const evCache = {};
+function eventsFor(key) {
+  if (evCache[key]) return evCache[key];
+  const a = dayStart(key) - DAY, b = dayStart(key) + 2 * DAY;
+  let list = EMB.filter(e => e.t >= a && e.t <= b);
+  if (a < COV_A - 3 * HR) list = list.concat(harmonicExtremes(a, Math.min(b, COV_A - 3 * HR)));
+  if (b > COV_B + 3 * HR) list = list.concat(harmonicExtremes(Math.max(a, COV_B + 3 * HR), b));
+  list.sort((x, y) => x.t - y.t);
+  const clean = [];
+  for (const e of list) {
+    const prev = clean[clean.length - 1];
+    if (prev && prev.k === e.k) {
+      const keepNew = (prev.src === "est" && e.src !== "est") || (prev.src === e.src && (e.k === "H" ? e.h > prev.h : e.h < prev.h));
+      if (keepNew) clean[clean.length - 1] = e;
+    } else clean.push(e);
+  }
+  return (evCache[key] = clean);
+}
+function tideAt(t) {
+  const ev = eventsFor(keyOf(t));
+  for (let i = 0; i < ev.length - 1; i++) {
+    const a = ev[i], b = ev[i + 1];
+    if (t >= a.t && t <= b.t) { const f = (t - a.t) / (b.t - a.t); return { h: a.h + (b.h - a.h) * (1 - Math.cos(Math.PI * f)) / 2, rising: b.h > a.h, next: b, prev: a }; }
+  }
+  return null;
+}
+const dayEvents = key => { const d0 = dayStart(key); return eventsFor(key).filter(e => e.t >= d0 && e.t < d0 + DAY); };
+function tideSrc(key) { const ev = dayEvents(key); if (ev.some(e => e.src === "bmd")) return "bmd"; if (ev.some(e => e.src === "est")) return "est"; return "model"; }
+function dayRange(key) { const ev = dayEvents(key); if (!ev.length) return 0; return Math.max(...ev.map(e => e.h)) - Math.min(...ev.map(e => e.h)); }
+
+/* ================= SUN & MOON ================= */
+const LAT = 26.2285, LON = 50.586;
+function sunTimes(key) {
+  if (key === "2026-09-27") return [toMs(key, "05:28"), toMs(key, "17:29")];
+  const noonUtc = dayStart(key) + 12 * HR;
+  const jd = noonUtc / DAY + 2440587.5;
+  const n = Math.round(jd - 2451545.0 + 0.0008);
+  const Js = n - LON / 360;
+  const M = norm360(357.5291 + 0.98560028 * Js);
+  const C = 1.9148 * Math.sin(M * rad) + 0.02 * Math.sin(2 * M * rad) + 0.0003 * Math.sin(3 * M * rad);
+  const lam = norm360(M + C + 180 + 102.9372);
+  const Jt = 2451545.0 + Js + 0.0053 * Math.sin(M * rad) - 0.0069 * Math.sin(2 * lam * rad);
+  const dec = Math.asin(Math.sin(lam * rad) * Math.sin(23.4397 * rad));
+  const cw = (Math.sin(-0.833 * rad) - Math.sin(LAT * rad) * Math.sin(dec)) / (Math.cos(LAT * rad) * Math.cos(dec));
+  const w = Math.acos(Math.max(-1, Math.min(1, cw))) / rad;
+  const toMsJ = J => Math.round((J - 2440587.5) * DAY / MIN) * MIN;
+  return [toMsJ(Jt - w / 360), toMsJ(Jt + w / 360)];
+}
+function moonAt(ms) {
+  const T = (ms - J2000) / DAY / 36525;
+  const D = norm360(297.8501921 + 445267.1114034 * T), M = norm360(357.5291092 + 35999.0502909 * T), Mp = norm360(134.9633964 + 477198.8675055 * T);
+  const i = 180 - D - 6.289 * Math.sin(Mp * rad) + 2.100 * Math.sin(M * rad) - 1.274 * Math.sin((2 * D - Mp) * rad) - 0.658 * Math.sin(2 * D * rad) - 0.214 * Math.sin(2 * Mp * rad) - 0.110 * Math.sin(D * rad);
+  const illum = (1 + Math.cos(i * rad)) / 2;
+  return { illum, waxing: D < 180, strength: Math.abs(Math.cos(i * rad)) };
+}
+function moonName(m) {
+  const p = m.illum * 100;
+  if (p < 3) return L("New moon", "محاق");
+  if (p > 97) return L("Full moon", "بدر");
+  if (Math.abs(p - 50) <= 5) return m.waxing ? L("First quarter", "تربيع أول") : L("Last quarter", "تربيع أخير");
+  if (m.waxing) return p < 50 ? L("Waxing crescent", "هلال متزايد") : L("Waxing gibbous", "أحدب متزايد");
+  return p < 50 ? L("Waning crescent", "هلال متناقص") : L("Waning gibbous", "أحدب متناقص");
+}
+const MOONRISE = { "2026-09-27": ["17:46", "06:57"], "2026-09-28": ["18:23"], "2026-09-29": ["19:04"], "2026-09-30": ["19:52"], "2026-10-01": ["20:47"], "2026-10-02": ["21:49"], "2026-10-03": ["22:55"] };
+
+/* ================= WEATHER (BMD, issued 27 Sep 2026) ================= */
+const WX = {
+  "2026-09-27": { en: "Rather hot during the day and humid overnight", ar: "حار نسبياً خلال النهار ورطب خلال الليل", base: [5,10], baseDir: "Variable", strong: [12,17], strongDir: "NE", when: "afternoon", sea: ["1–2 ft","2–4 ft"], tmax: 39, tmin: 27, rh: [30,90] },
+  "2026-09-28": { en: "Hot by day, humid overnight, chance of mist around dawn", ar: "حار خلال النهار ورطب ليلاً مع فرصة لضباب خفيف عند الفجر", base: [5,10], baseDir: "Variable", strong: [10,15], strongDir: "NE", when: "day", sea: ["1–3 ft"], tmax: 40, tmin: 26, rh: [30,90] },
+  "2026-09-29": { en: "Hot during the day and humid overnight", ar: "حار خلال النهار ورطب خلال الليل", base: [5,10], baseDir: "Variable", strong: [10,15], strongDir: "NE", when: "afternoon", sea: ["1–3 ft"], tmax: 40, tmin: 26, rh: [25,85] },
+  "2026-09-30": { en: "Hot during the day and humid overnight", ar: "حار خلال النهار ورطب خلال الليل", base: [5,10], baseDir: "Variable", strong: [10,15], strongDir: "N", when: "afternoon", sea: ["1–3 ft"], tmax: 40, tmin: 26, rh: [25,85] },
+  "2026-10-01": { en: "Rather hot during the day and humid overnight", ar: "حار نسبياً خلال النهار ورطب خلال الليل", base: [5,10], baseDir: "Variable", strong: [10,15], strongDir: "N", when: "afternoon", sea: ["1–3 ft"], tmax: 39, tmin: 26, rh: [25,85] },
+  "2026-10-02": { en: "Rather hot during the day and humid at times", ar: "حار نسبياً خلال النهار ورطب أحياناً", base: [10,15], baseDir: "E", strong: null, sea: ["1–3 ft"] },
+  "2026-10-03": { en: "Rather hot during the day and humid at times", ar: "حار نسبياً خلال النهار ورطب أحياناً", base: [10,15], baseDir: "NE", strong: null, sea: ["1–3 ft"] },
+  "2026-10-04": { en: "Rather hot during the day and humid overnight", ar: "حار نسبياً خلال النهار ورطب خلال الليل", base: [10,15], baseDir: "N", strong: null, sea: ["1–3 ft"] },
+  "2026-10-05": { en: "Rather hot during the day, generally fine overnight", ar: "حار نسبياً خلال النهار ومعتدل عموماً ليلاً", base: [12,17], baseDir: "NW", strong: null, sea: ["1–2 ft","2–4 ft"] },
+  "2026-10-06": { en: "Rather hot during the day, generally fine overnight", ar: "حار نسبياً خلال النهار ومعتدل عموماً ليلاً", base: [12,17], baseDir: "NW", strong: null, sea: ["1–2 ft","2–4 ft"] }
+};
+const OBS = { "2026-09-27": { pressure: 1006, delta: ["Steady · 1005 → 1006 hPa since this time yesterday (OBBI)", "مستقر · من 1005 إلى 1006 هكتوباسكال خلال 24 ساعة (مطار البحرين)"], vis: "7–12 km" } };
+const SEA_NORMAL = [21,19.5,20.5,23,27,30,32,33.5,32.5,30.5,27.5,23.5];
+const ft = s => L(s, s.replace("ft", "قدم"));
+
+/* ================= FISH ================= */
+const FISH = [
+  { id:"hamour", ar:"هامور", tr:"Hamour", en:"Orange-spotted grouper", sci:"Epinephelus coioides", zone:"bottom", size:"M", typical:[1,4], max:["1.2 m, 15 kg","1.2 م، 15 كغ"], minLen:42, img:true,
+    habitat:["Rocks, reefs and wrecks; young fish in mangroves and creeks","الصخور والشعاب والحطام، والصغار في القرم والأخوار"],
+    method:["Bottom handline with a heavy sinker right on structure; slow deep jigging","حداق قاعي بثقالة ثقيلة فوق الصخور مباشرة، أو جيغ عميق بطيء"],
+    bait:["Fresh squid or cuttlefish, live small fish, whole shrimp","حبار أو خثاق طازج، سمك صغير حي، روبيان كامل"],
+    tip:["Lift it off the bottom fast after the bite or it locks into a hole. Heavily overfished; spawns March–June.","ارفعه عن القاع بسرعة بعد الضربة وإلا دخل في جحر. يتعرض لصيد جائر، ويتكاثر من مارس إلى يونيو."],
+    wiki:"https://en.wikipedia.org/wiki/Orange-spotted_grouper" },
+  { id:"safi", ar:"صافي", tr:"Safi", en:"White-spotted rabbitfish", sci:"Siganus canaliculatus", zone:"shallow", size:"S", typical:[0.2,0.4], max:["40 cm (20 cm usual)","40 سم (عادة 20 سم)"], minLen:15, img:true,
+    habitat:["Shallow seagrass, algae reefs and lagoons, down to 50 m","الحشائش والطحالب الضحلة والبحيرات، حتى عمق 50 م"],
+    method:["Light handline or float with a very small hook","حداق خفيف أو عوامة مع شص صغير جداً"],
+    bait:["Green weed or algae, bread dough","حشيش أو طحلب أخضر، عجينة خبز"],
+    tip:["Plant eater with venomous fin spines. Hold it with a cloth.","نباتي وأشواك زعانفه سامة، أمسكه بقطعة قماش."],
+    wiki:"https://en.wikipedia.org/wiki/Siganus_canaliculatus" },
+  { id:"sobaity", ar:"سبيطي", tr:"Sobaity", en:"Sobaity seabream", sci:"Sparidentex hasta", zone:"shallow", size:"S", typical:[0.3,1], max:["58 cm","58 سم"], minLen:null, img:true,
+    habitat:["Coastal bottom to 20 m","القاع الساحلي حتى عمق 20 م"],
+    method:["Bottom handline","حداق قاعي"],
+    bait:["Shrimp, crab, small fish strips","روبيان، قبقب، شرائح سمك صغيرة"],
+    tip:["Eats almost anything on the bottom, so fresh natural bait works best.","يأكل تقريباً أي شيء في القاع، والطُعم الطبيعي الطازج هو الأفضل."],
+    wiki:"https://en.wikipedia.org/wiki/Sparidentex_hasta" },
+  { id:"sheri", ar:"شعري", tr:"Sheri", en:"Spangled emperor", sci:"Lethrinus nebulosus", zone:"bottom", size:"M", typical:[0.5,2], max:["87 cm","87 سم"], minLen:22, img:true,
+    habitat:["Seagrass, sand and reef, usually 10–75 m, shallower near structure","الحشائش والرمل والشعاب، غالباً بين 10 و75 م وأقرب للساحل عند الصخور"],
+    method:["Bottom handline on sand beside reef or grass; light jig","حداق قاعي على الرمل بجانب الشعاب أو الحشائش، أو جيغ خفيف"],
+    bait:["Shrimp, squid, crab pieces, clams","روبيان، حبار، قطع قبقب، محار"],
+    tip:["Feeds on crabs, molluscs and sea urchins.","يتغذى على السرطانات والرخويات وقنافذ البحر."],
+    wiki:"https://en.wikipedia.org/wiki/Spangled_emperor" },
+  { id:"faskar", ar:"فسكر", tr:"Faskar", en:"Twobar seabream", sci:"Acanthopagrus bifasciatus", zone:"shallow", size:"M", typical:[0.5,1.5], max:["about 60 cm","نحو 60 سم"], minLen:22, img:true,
+    habitat:["Shallow inshore reefs, 2–30 m","الشعاب الضحلة القريبة من الساحل، 2–30 م"],
+    method:["Handline on reef patches and rocky ground","حداق فوق بقع الشعاب والقاع الصخري"],
+    bait:["Shrimp, crab, mussels","روبيان، قبقب، بلح البحر"],
+    tip:["Spawns January–April in the Gulf, when it gathers on reefs.","يتكاثر من يناير إلى أبريل في الخليج ويتجمع على الشعاب."],
+    wiki:"https://en.wikipedia.org/wiki/Acanthopagrus_bifasciatus" },
+  { id:"jid", ar:"جد", tr:"Jid", en:"Pickhandle barracuda", sci:"Sphyraena jello", zone:"surface", size:"M", typical:[1,3], max:["about 1.5 m","نحو 1.5 م"], minLen:null, img:true,
+    habitat:["Schools by reefs and channels, 2–200 m; hunts at night","أسراب قرب الشعاب والقنوات، من 2 إلى 200 م، ويصطاد ليلاً"],
+    method:["Casting spoons or minnow lures; trolling; live bait at dawn and dusk","رمي الملاعق والطُعوم الصناعية، الجر، أو الطُعم الحي عند الفجر والغروب"],
+    bait:["Live small fish, fish strips, silver lures","سمك صغير حي، شرائح سمك، طُعوم فضية"],
+    tip:["Use a wire trace. Spawns in the Gulf in October–November.","استخدم تيل سلكي. يتكاثر في الخليج في أكتوبر ونوفمبر."],
+    wiki:"https://en.wikipedia.org/wiki/Sphyraena_jello" },
+  { id:"kanaad", ar:"كنعد", tr:"Kanaad", en:"Kingfish (narrow-barred Spanish mackerel)", sci:"Scomberomorus commerson", zone:"surface", size:"L", typical:[3,10], max:["2 m, 70 kg","2 م، 70 كغ"], minLen:45, img:false, general:[3,4,5,10,11,12],
+    habitat:["Open water near reef edges and channels, surface to mid-water","المياه المفتوحة قرب حواف الشعاب والقنوات، من السطح إلى منتصف العمق"],
+    method:["Trolling spoons or plugs; casting metal jigs; drifting live or strip bait","الجر بالملاعق والطُعوم الصناعية، رمي الجيغ المعدني، أو الطُعم الحي المنجرف"],
+    bait:["Live sardine or garfish, fish strips, chrome spoons","سردين أو حاقول حي، شرائح سمك، ملاعق فضية"],
+    tip:["Use a wire or heavy fluorocarbon trace. The teeth cut plain line.","استخدم تيل سلكي أو فلوروكربون قوي، فأسنانه تقطع الخيط العادي."],
+    wiki:"https://en.wikipedia.org/wiki/Narrow-barred_Spanish_mackerel" },
+  { id:"shaam", ar:"شعم", tr:"Shaam", en:"Yellowfin seabream", sci:"Acanthopagrus spp.", zone:"shallow", size:"S", typical:[0.3,1], max:["about 40 cm","نحو 40 سم"], minLen:21, img:false, general:[1,2,3,10,11,12],
+    habitat:["Rocks, jetties, tidal flats and creek mouths, to 50 m","الصخور والأرصفة والمسطحات المدية ومصبات الأخوار، حتى 50 م"],
+    method:["Light bottom handline close to rocks and pilings","حداق قاعي خفيف قرب الصخور والأعمدة"],
+    bait:["Shrimp, crab, clams, mussels","روبيان، قبقب، محار، بلح البحر"],
+    tip:["Moves onto the flats with the rising tide to feed.","يدخل المسطحات مع المد الصاعد ليتغذى."],
+    wiki:"https://en.wikipedia.org/wiki/Acanthopagrus" },
+  { id:"dhila", ar:"ضلعة", tr:"Dhil'a", en:"Talang queenfish", sci:"Scomberoides commersonnianus", zone:"surface", size:"L", typical:[2,6], max:["1.2 m, 16 kg","1.2 م، 16 كغ"], minLen:null, img:false, general:[9,10,11,12],
+    habitat:["Coastal reefs, points and channels, in small schools","الشعاب الساحلية والرؤوس والقنوات، في أسراب صغيرة"],
+    method:["Casting poppers and spoons; trolling; live bait under a float","رمي البوبر والملاعق، الجر، أو طُعم حي تحت عوامة"],
+    bait:["Live sardine or mullet, surface lures","سردين أو بياح حي، طُعوم سطحية"],
+    tip:["Strong jumper. Keep steady pressure and do not rush the landing.","يقفز بقوة، حافظ على شد ثابت ولا تستعجل إخراجه."],
+    wiki:"https://en.wikipedia.org/wiki/Scomberoides_commersonnianus" },
+  { id:"jesh", ar:"جش", tr:"Jesh", en:"Trevally (e.g. yellowspotted)", sci:"Carangoides spp.", zone:"mid", size:"M", typical:[1,5], max:["1.2 m, 18 kg","1.2 م، 18 كغ"], minLen:null, img:false, general:[9,10,11,12],
+    habitat:["Reefs, lagoons and sand banks to about 100 m","الشعاب والبحيرات والضحاضح الرملية حتى نحو 100 م"],
+    method:["Vertical jigging with metal slugs; soft plastics; small baits","جيغ عمودي بقطع معدنية، طُعوم سيليكون، أو طُعم صغير"],
+    bait:["Small fish, crab, squid, metal jigs","سمك صغير، قبقب، حبار، جيغ معدني"],
+    tip:["Hunts in groups on the moving tide. Hits jigs hard near the bottom.","يصطاد في مجموعات مع حركة الماء، ويضرب الجيغ بقوة قرب القاع."],
+    wiki:"https://en.wikipedia.org/wiki/Yellowspotted_trevally" }
+];
+// Names read from the Al-Busmait chart (only labels that were legible).
+const NAMES = {
+  hamour:["هامور","Hamour"], safi:["صافي","Safi"], sobaity:["سبيطي","Sobaity"], sheri:["شعري","Sheri"], faskar:["فسكر","Faskar"], jid:["جد","Jid (barracuda)"],
+  gargufan:["قرقفان","Gargufan"], andaq:["عندق","Andaq"], musallagh:["مصلغ","Musallagh"], badah:["بدح","Badah"], meed:["ميد","Meed"],
+  sikin:["سكن","Sikin"], rabeeb:["ربيب","Rabeeb"], rubyan:["ربيان","Shrimp"], qubqub:["قبقب","Blue crab"], khathaq:["خثاق","Cuttlefish"]
+};
+const IMG_CAL = { 1:["sobaity","sheri"], 2:["qubqub","khathaq"], 3:["safi"], 4:["safi"], 5:["safi","musallagh","badah","jid"], 6:["meed","sikin","rabeeb"], 7:["rubyan"], 8:["safi"], 9:["safi"], 10:["safi"], 11:["andaq"], 12:["faskar","gargufan"] };
+const MINLEN = { hamour:42, safi:15, sheri:22, faskar:22, gargufan:15, andaq:24, musallagh:12, badah:12, sikin:45, rabeeb:17, rubyan:10, qubqub:9 };
+const imgMonths = id => id === "hamour" ? [1,2,3,4,5,6,7,8,9,10,11,12] : Object.keys(IMG_CAL).map(Number).filter(m => IMG_CAL[m].includes(id));
+const bestMonths = f => f.img ? imgMonths(f.id) : f.general;
+const ZONES = {
+  surface: [["Surface / pelagic","Cast or troll near the top"],["سطحية · مياه مفتوحة","ارمِ أو جُرّ قرب السطح"]],
+  mid: [["Mid-water & reef","Jig through the water column"],["منتصف الماء والشعاب","جيغ عبر عمود الماء"]],
+  bottom: [["Bottom · deeper ground","Sinker on the bottom near structure"],["قاعية · أعماق أكبر","ثقالة على القاع قرب الصخور"]],
+  shallow: [["Shallow rocks & seagrass","Light line close to shore"],["صخور وحشائش ضحلة","خيط خفيف قرب الساحل"]]
+};
+const zoneName = z => ZONES[z][lang === "ar" ? 1 : 0][0];
+const zoneNote = z => ZONES[z][lang === "ar" ? 1 : 0][1];
+const SIZE = { S: ["Small","صغير"], M: ["Medium","متوسط"], L: ["Large","كبير"] };
+const sizeName = s => L(SIZE[s][0], SIZE[s][1]);
+const kg = r => L(`${r[0]}–${r[1]} kg`, `${r[0]}–${r[1]} كغ`);
+const fishName = f => L(f.tr, f.ar);
+
+/* ================= BANS (annual, SCE; 2026 dates) ================= */
+const BANS = [
+  { id:"kanaadnet", name:["Kingfish (kanaad) nets","الكنعد بالشباك"], from:[8,15], to:[10,15], type:"net", fish:["kanaad"] },
+  { id:"sheri", name:["Sheri · Safi · Andaq","الشعري · الصافي · العندق"], from:[4,1], to:[5,31], type:"full", fish:["sheri","safi","andaq"] },
+  { id:"crab", name:["Crab","القبقب"], from:[3,15], to:[5,15], type:"full", fish:["qubqub"] },
+  { id:"shrimp", name:["Shrimp","الربيان"], from:[2,1], to:[7,31], type:"full", fish:["rubyan"] }
+];
+const md = key => { const p = parts(dayStart(key)); return p.m * 100 + p.d; };
+const banActive = (b, key) => { const x = md(key); return x >= b.from[0] * 100 + b.from[1] && x <= b.to[0] * 100 + b.to[1]; };
+const banActiveInMonth = (b, m) => m >= b.from[0] && m <= b.to[0];
+function statusOf(id, key) {
+  for (const b of BANS) if (b.fish.includes(id) && banActive(b, key)) return b.type === "net" ? { c: "st-line", t: L("Line only · nets banned", "بالخيط فقط · الشباك ممنوعة") } : { c: "st-ban", t: L("Closed season", "فترة حظر") };
+  return { c: "st-open", t: L("Open", "مسموح") };
+}
+const SIZES = [
+  ["الكنعد","Kingfish",45],["السِّكِن","Sikin",45],["الهامور","Grouper",42],["الحمام","Hamam",22],["الفَسْكَر","Twobar seabream",22],["الشِّعري","Spangled emperor",22],
+  ["العندق","Andaq",24],["الشِّعِم","Yellowfin seabream",21],["الرِّبيب","Rabeeb",17],["الصافي","Rabbitfish",15],["الصافي الصنيفي","Safi sunaifi",15],["الجَنَم","Janam",17],
+  ["القُرقُفان","Gargufan",15],["المصلغ","Musallagh",12],["البدْح","Badah",12],["نيسر","Naisar",12],["الربيان","Shrimp",10],["القبقب","Blue crab",9]
+];
+const NEWS = [
+  { d:["12 Aug 2026","12 أغسطس 2026"], t:["SCE bans kingfish net fishing from 15 Aug to 15 Oct. Lines stay allowed.","المجلس يحظر صيد الكنعد بالشباك من 15 أغسطس إلى 15 أكتوبر، ويبقى الصيد بالخيط مسموحاً."], u:"https://www.gdnonline.com/Details/1403216/Two-month-ban-on-kingfish-net-fishing-announced", s:"GDN" },
+  { d:["29 Jul 2026","29 يوليو 2026"], t:["Six-month shrimp ban (1 Feb – 31 Jul) lifted on 1 August.","رفع حظر صيد الربيان (1 فبراير – 31 يوليو) اعتباراً من 1 أغسطس."], u:"https://www.gdnonline.com/Details/1401898/Annual-ban-on-shrimp-fishing-set-to-be-lifted", s:"GDN" },
+  { d:["13 May 2026","13 مايو 2026"], t:["Two-month crab ban (15 Mar – 15 May) ends.","انتهاء حظر صيد القبقب (15 مارس – 15 مايو)."], u:"https://www.gdnonline.com/Details/1394501/Annual-two-month-ban-on-crab-fishing-is-set-to-end", s:"GDN" },
+  { d:["30 Mar 2026","30 مارس 2026"], t:["Sheri, safi and andaq closed 1 Apr – 31 May for spawning.","حظر صيد الشعري والصافي والعندق من 1 أبريل إلى 31 مايو لموسم التكاثر."], u:"https://www.gdnonline.com/Details/1379888", s:"GDN" },
+  { d:["19 Jan 2025","19 يناير 2025"], t:["Resolution No. 3 of 2025 sets minimum legal sizes for 18 species.","القرار رقم (3) لسنة 2025 يحدد الحد الأدنى لأطوال 18 نوعاً."], u:"https://www.lloc.gov.bh/Legislation/HTM/RSCE0325", s:"LLOC" }
+];
+
+/* ================= SCORING ================= */
+function lightScore(t) {
+  const [rise, set] = sunTimes(keyOf(t)); const w = 75 * MIN;
+  if (Math.abs(t - rise) <= w || Math.abs(t - set) <= w) return 1;
+  if (t < rise - w || t > set + w) return 0.65;
+  const p = parts(t); const h = p.H + p.M / 60; const hot = p.m >= 5 && p.m <= 10;
+  if (h >= 10.5 && h <= 15) return hot ? 0.18 : 0.45;
+  return 0.55;
+}
+function lightTag(a, b) {
+  const [rise, set] = sunTimes(keyOf((a + b) / 2)); const w = 75 * MIN;
+  if (a <= rise + w && b >= rise - w) return "dawn";
+  if (a <= set + w && b >= set - w) return "dusk";
+  if (b < rise - w || a > set + w) return "night";
+  const mid = parts((a + b) / 2); const h = mid.H + mid.M / 60;
+  return h >= 10.5 && h <= 15 ? "midday" : "day";
+}
+function windKtAt(t) {
+  const w = WX[keyOf(t)]; if (!w) return null;
+  const h = parts(t).H;
+  if (w.strong && (w.when === "afternoon" ? (h >= 12 && h < 18) : (h >= 9 && h < 17))) return w.strong[1];
+  return w.base[1];
+}
+const windScore = kt => kt == null ? 0.85 : kt <= 12 ? 1 : kt <= 17 ? 0.78 : kt <= 22 ? 0.5 : 0.25;
+const tideScore = r => 0.45 + 0.55 * Math.min(1, r / 1.9);
+const moonScore = t => 0.5 + 0.5 * moonAt(t).strength;
+const winCache = {};
+function windowsFor(key) {
+  if (winCache[key]) return winCache[key];
+  const d0 = dayStart(key), d1 = d0 + DAY; const ev = eventsFor(key); const out = [];
+  ev.forEach((e, i) => {
+    const prev = ev[i - 1], next = ev[i + 1];
+    if (prev) add(e.t - 120 * MIN, e.t - 30 * MIN, e, "into", Math.abs(e.h - prev.h));
+    if (next) add(e.t + 30 * MIN, e.t + 120 * MIN, e, "after", Math.abs(next.h - e.h));
+  });
+  function add(a, b, e, side, range) {
+    a = Math.max(a, d0); b = Math.min(b, d1);
+    if (b - a < 45 * MIN) return;
+    let Ls = 0, W = 0, n = 0, maxKt = null;
+    for (let t = a; t <= b; t += 10 * MIN) { Ls += lightScore(t); const k = windKtAt(t); W += windScore(k); if (k != null) maxKt = Math.max(maxKt || 0, k); n++; }
+    Ls /= n; W /= n;
+    const score = Math.round(100 * (0.34 * tideScore(range) + 0.32 * Ls + 0.2 * W + 0.14 * moonScore((a + b) / 2)));
+    out.push({ a, b, e, side, range, score, light: lightTag(a, b), maxKt });
+  }
+  return (winCache[key] = out.sort((x, y) => x.a - y.a));
+}
+const stars = s => s >= 90 ? 5 : s >= 78 ? 4 : s >= 64 ? 3 : s >= 50 ? 2 : 1;
+const starHTML = s => { const n = stars(s); return "★".repeat(n) + `<span class="off">${"★".repeat(5 - n)}</span>`; };
+const starTxt = s => "★".repeat(stars(s)) + "☆".repeat(5 - stars(s));
+function stageText(w) {
+  const t = hm(w.e.t);
+  if (w.side === "into") return w.e.k === "H" ? L(`Rising water into the ${t} high`, `ماء صاعد حتى مد ${t}`) : L(`Falling water into the ${t} low`, `ماء نازل حتى جزر ${t}`);
+  return w.e.k === "H" ? L(`First of the ebb after the ${t} high`, `بداية الجزر بعد مد ${t}`) : L(`First of the flood after the ${t} low`, `بداية المد بعد جزر ${t}`);
+}
+const LIGHT = { dawn: ["Dawn light","ضوء الفجر"], dusk: ["Sunset light","وقت الغروب"], night: ["Night","ليل"], midday: ["Midday heat","حر الظهيرة"], day: ["Daylight","نهار"] };
+const lightName = k => L(LIGHT[k][0], LIGHT[k][1]);
+const strength = r => r >= 1.6 ? L("Strong tide","مد قوي") : r >= 1.25 ? L("Moderate tide","مد متوسط") : L("Weak tide","مد ضعيف");
+function reasons(w) {
+  const c = [{ t: stageText(w), g: true }];
+  c.push({ t: lightName(w.light), g: ["dawn","dusk","night"].includes(w.light), s: w.light === "midday" });
+  c.push({ t: `${strength(w.range)} · ${w.range.toFixed(1)} ${L("m range","م مدى")}`, g: w.range >= 1.6, s: w.range < 1.25 });
+  if (w.maxKt == null) c.push({ t: L("Wind: check BMD forecast","الرياح: راجع توقعات الأرصاد") });
+  else c.push({ t: w.maxKt <= 12 ? L(`Light wind, up to ${w.maxKt} kt`,`رياح خفيفة حتى ${w.maxKt} عقدة`) : L(`Breezy, up to ${w.maxKt} kt`,`نسيم حتى ${w.maxKt} عقدة`), g: w.maxKt <= 12, s: w.maxKt > 17 });
+  const m = moonAt((w.a + w.b) / 2);
+  if (m.strength > 0.85) c.push({ t: m.illum > 0.5 ? L("Full-moon week","أسبوع البدر") : L("New-moon week","أسبوع المحاق"), g: true });
+  return c;
+}
+
+/* ================= STATE ================= */
+let sample = null, aiReady = false, aiCtl = null, fishTab = "season";
+const nowMs = () => Date.now();
+let TODAY = keyOf(nowMs());
+let sel = TODAY;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+/* ================= STATIC TEXT ================= */
+const STYLE_OPTS = [["exp","Handline, learning rod","حداق، وأتعلم السنارة","Experienced handline fisher, beginner with a rod and reel"],["hand","Handline only","حداق فقط","Handline only"],["rod","Rod & reel","سنارة وبكرة","Rod and reel (spinning), beginner to intermediate"]];
+const SPOT_OPTS = [["shore","Shore / jetty","الساحل / الرصيف","Shore, breakwater or jetty"],["shallow","Boat · shallow","قارب · مياه ضحلة","Small boat in shallow water (under 10 m)"],["deep","Boat · deeper","قارب · مياه أعمق","Boat over deeper reefs and channels (10 m or more)"]];
+function applyStatic() {
+  const root = document.documentElement; root.lang = lang; root.dir = lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-t]").forEach(el => { const s = STR[el.dataset.t]; if (s) el.textContent = L(s[0], s[1]); });
+  $("brandTitle").innerHTML = L('Fishing Time <span class="amp">&amp;</span> Tide', 'وقت الصيد <span class="amp">و</span>المد والجزر');
+  $("langBtn").innerHTML = lang === "ar" ? "English" : '<span class="ar" lang="ar">العربية</span>';
+  $("langBtn").setAttribute("aria-label", lang === "ar" ? "Switch to English" : "التبديل إلى العربية");
+  const fill = (id, opts) => { const s = $(id); const v = s.value; s.innerHTML = opts.map(o => `<option value="${o[0]}">${esc(L(o[1], o[2]))}</option>`).join(""); if (v) s.value = v; };
+  fill("aiStyle", STYLE_OPTS); fill("aiSpot", SPOT_OPTS);
+  $("srcList").innerHTML = [
+    [`<a href="https://www.bahrainweather.gov.bh/files/forecasts/BMD_PublicWeatherForecast.pdf" target="_blank" rel="noopener">${L("BMD public forecast","النشرة العامة للأرصاد الجوية")}</a>`, L("issued 27/09/2026 05:27: official tide times at Mina Salman, wind, sea state, temperature, humidity, sun and moon.","صدرت 27/09/2026 الساعة 05:27: أوقات المد والجزر الرسمية في ميناء سلمان، والرياح، وحالة البحر، والحرارة، والرطوبة، والشمس والقمر.")],
+    [`<a href="https://www.bahrainweather.gov.bh/" target="_blank" rel="noopener">bahrainweather.gov.bh</a>`, L("tide range 0.7–2.6 m and the 10-day forecast.","مدى المد 0.7–2.6 م وتوقعات 10 أيام.")],
+    [`<a href="https://www.bahrainweather.gov.bh/files/forecasts/BMD_MarineAreasForecasts.pdf" target="_blank" rel="noopener">${L("BMD marine areas forecast","توقعات المناطق البحرية")}</a>`, L("visibility and inshore/offshore sea state.","مدى الرؤية وحالة البحر قرب الساحل وفي العرض.")],
+    [`<a href="https://www.bahrainweather.gov.bh/files/forecasts/BH_BMS_FiveDayForecastArabic.pdf" target="_blank" rel="noopener">${L("BMD 5-day forecast","توقعات 5 أيام")}</a>`, L("28 Sep – 1 Oct.","من 28 سبتمبر إلى 1 أكتوبر.")],
+    [`<a href="https://aviationweather.gov/api/data/metar?ids=OBBI&amp;hours=24&amp;format=raw" target="_blank" rel="noopener">NOAA Aviation Weather (OBBI)</a>`, L("air pressure at Bahrain International Airport.","الضغط الجوي في مطار البحرين الدولي.")],
+    [`<a href="https://www.tide-forecast.com/locations/Mina-Salman-Bahrain/tides/latest" target="_blank" rel="noopener">Tide-Forecast, Mina Salman</a>`, L("predicted tides 28 Sep – 24 Oct 2026. After that, the page uses its own harmonic tide model fitted to these predictions. Bahrain publishes its yearly tide book in print only.","تنبؤات المد من 28 سبتمبر إلى 24 أكتوبر 2026، وبعدها تستخدم الصفحة نموذجاً توافقياً للمد مبنياً على هذه التنبؤات. كتاب المد السنوي في البحرين يصدر مطبوعاً فقط.")],
+    [L("Fish calendar image","صورة تقويم الأسماك"), L("“Quality of Bahrain fish by Gregorian month”, Captain Ahmed bin Isa Al-Busmait, July 2020.","«جودة أسماك البحرين حسب الشهور الميلادية»، الربان أحمد بن عيسى البوسميط، يوليو 2020.")],
+    [`<a href="https://www.lloc.gov.bh/Legislation/HTM/RSCE0325" target="_blank" rel="noopener">${L("SCE Resolution No. 3 of 2025","قرار المجلس الأعلى للبيئة رقم (3) لسنة 2025")}</a>`, L("minimum legal sizes.","الحد الأدنى للأطوال.")],
+    [`<a href="https://www.gdnonline.com/Details/1403216/Two-month-ban-on-kingfish-net-fishing-announced" target="_blank" rel="noopener">GDN</a>`, L("reports of SCE ban announcements.","تغطية قرارات الحظر الصادرة عن المجلس.")],
+    [L("Wikipedia","ويكيبيديا"), L("species sizes, habitat, depth and spawning (linked on each fish).","أحجام الأنواع وموائلها وأعماقها ومواسم تكاثرها (رابط في كل بطاقة).")],
+    [`<a href="https://www.climatestotravel.com/climate/bahrain" target="_blank" rel="noopener">${L("Sea-temperature normals","معدلات حرارة البحر")}</a>`, L("BMD publishes no live sea temperature.","لا تنشر الأرصاد قراءة حية لحرارة البحر.")],
+    [L("Sun and moon","الشمس والقمر"), L("calculated for Manama and checked against BMD's 27 Sep values.","محسوبة لموقع المنامة ومطابقة لقيم الأرصاد ليوم 27 سبتمبر.")]
+  ].map(([a, b]) => `<li>${a}: ${esc(b)}</li>`).join("");
+  $("method").innerHTML = `<b>${L("How windows are scored.","طريقة تقييم النوافذ.")}</b> ` + esc(L(
+    "Each window around a tide turn gets 0–100 points: tide range 34% (bigger range, more water movement), light 32% (dawn and dusk best, night good, 10:30–15:00 poor in hot months), wind 20% (under 12 kt ideal, above 17 kt hard for handlines) and moon 14% (new and full moon best). Stars: 5 at 90+, 4 at 78+, 3 at 64+, 2 at 50+. Predicted tides can differ from the official book by up to about 30 minutes; model estimates further ahead can differ by up to about an hour.",
+    "كل نافذة حول انقلاب الماء تأخذ من 0 إلى 100 نقطة: مدى المد 34% (مدى أكبر يعني حركة ماء أكثر)، والضوء 32% (الفجر والغروب الأفضل، والليل جيد، ومن 10:30 إلى 15:00 ضعيف في الأشهر الحارة)، والرياح 20% (أقل من 12 عقدة مثالي، وأكثر من 17 عقدة صعب للحداق)، والقمر 14% (البدر والمحاق الأفضل). النجوم: 5 عند 90+، و4 عند 78+، و3 عند 64+، و2 عند 50+. قد تختلف أوقات المد المتوقعة عن الكتاب الرسمي بنحو 30 دقيقة، وتقديرات النموذج للفترات الأبعد بنحو ساعة."));
+}
+
+/* ================= HEADER ================= */
+function srcPill(src) {
+  const map = { bmd: ["official", L("Official BMD tides","مد وجزر رسمي من الأرصاد")], model: ["model", L("Predicted tides","مد وجزر متوقع")], est: ["est", L("Estimated tides","مد وجزر تقديري")] };
+  const [c, t] = map[src]; return `<span class="pill ${c}">${t}</span>`;
+}
+function renderHeader() {
+  const isToday = sel === TODAY; const now = nowMs(); const d0 = dayStart(sel);
+  $("dayLabel").textContent = (isToday ? L("Today · ","اليوم · ") : L("Viewing · ","عرض · ")) + longDate(sel);
+  $("clock").textContent = hm(now);
+  $("viewCtl").innerHTML = srcPill(tideSrc(sel)) + (isToday ? "" : `<button class="back-today" type="button" id="backToday">${L("Back to today","العودة لليوم")}</button>`);
+  if (!isToday) $("backToday").onclick = () => select(TODAY);
+  const nt = $("nextTide");
+  if (isToday) {
+    const cur = tideAt(now);
+    nt.textContent = cur ? L(`${cur.next.k === "H" ? "High" : "Low"} tide ${hm(cur.next.t)} · in ${dur(cur.next.t - now)} · water ${cur.rising ? "rising" : "falling"} (${cur.h.toFixed(1)} m now)`,
+      `${cur.next.k === "H" ? "المد" : "الجزر"} الساعة ${hm(cur.next.t)} · بعد ${dur(cur.next.t - now)} · الماء ${cur.rising ? "صاعد" : "نازل"} (${cur.h.toFixed(1)} م الآن)`) : "";
+  } else nt.textContent = L(`Clock shows Bahrain time now. Tides below are for ${shortDate(sel)}.`, `الساعة بتوقيت البحرين الآن. المد والجزر أدناه ليوم ${shortDate(sel)}.`);
+
+  $("tideEvents").innerHTML = dayEvents(sel).map(e => `
+    <div class="tev ${isToday && e.t < now ? "past" : ""}">
+      <span class="k">${e.k === "H" ? L("▲ High","▲ مد") : L("▼ Low","▼ جزر")}</span>
+      <span class="t num">${hm(e.t)}</span>
+      <span class="h">${e.src === "bmd" ? (e.k === "H" ? L("up to ","حتى ") : L("down to ","حتى ")) : ""}${e.h.toFixed(e.src === "bmd" ? 1 : 2)} ${L("m","م")} · ${e.src === "bmd" ? L("official","رسمي") : e.src === "model" ? L("predicted","متوقع") : L("estimate","تقديري")}</span>
+    </div>`).join("");
+
+  const w = WX[sel]; const o = OBS[sel]; const r = dayRange(sel); const m = moonAt(d0 + 12 * HR); const [sr, ss] = sunTimes(sel); const mr = MOONRISE[sel];
+  const na = L("Not in the loaded forecast","غير متوفر في التوقعات المحمّلة");
+  const stats = [
+    [L("Tide range","مدى المد"), `${r.toFixed(1)} ${L("m","م")}`, strength(r) + (tideSrc(sel) === "bmd" ? L(" · BMD 0.7–2.6 m"," · الأرصاد 0.7–2.6 م") : "")],
+    [L("Sea state","حالة البحر"), w ? ft(w.sea[0]) : "—", w ? (w.sea[1] ? L(`inshore · ${w.sea[1]} offshore`, `قرب الساحل · ${ft(w.sea[1])} في العرض`) : L("inshore and offshore","قرب الساحل وفي العرض")) : na],
+    [L("Wind","الرياح"), w ? `${w.base[0]}–${w.base[1]} ${L("kt","عقدة")}` : "—", w ? (w.strong ? L(`${dirTxt(w.baseDir)}; ${dirTxt(w.strongDir)} ${w.strong[0]}–${w.strong[1]} kt at times ${w.when === "afternoon" ? "in the afternoon" : "during the day"}`, `${dirTxt(w.baseDir)}، و${dirTxt(w.strongDir)} ${w.strong[0]}–${w.strong[1]} عقدة أحياناً ${w.when === "afternoon" ? "بعد الظهر" : "خلال النهار"}`) : L(`Mainly ${dirTxt(w.baseDir)}`, `${dirTxt(w.baseDir)} في الغالب`)) : na],
+    [L("Air","الهواء"), w && w.tmax ? `${w.tmax}° / ${w.tmin}°` : "—", w ? L(w.en, w.ar) : na],
+    [L("Humidity","الرطوبة"), w && w.rh ? `${w.rh[0]}–${w.rh[1]}%` : "—", w && w.rh ? L("Day minimum to night maximum","من أدنى النهار إلى أعلى الليل") : na],
+    [L("Pressure","الضغط"), o ? `${o.pressure} ${L("hPa","هكتوباسكال")}` : "—", o ? L(o.delta[0], o.delta[1]) : L("Measured on 27 Sep only","مقاس ليوم 27 سبتمبر فقط")],
+    [L("Visibility","مدى الرؤية"), o ? L(o.vis, o.vis.replace("km","كم")) : "—", o ? L("BMD marine areas forecast","توقعات المناطق البحرية") : L("Issued for 27 Sep only","صادر ليوم 27 سبتمبر فقط")],
+    [L("Water temp","حرارة الماء"), `≈${SEA_NORMAL[monthOf(sel) - 1]} °C`, L(`${mon(monthOf(sel) - 1)} normal. BMD has no live reading.`, `المعدل في ${mon(monthOf(sel) - 1)}. لا توجد قراءة حية.`)],
+    [L("Sun","الشمس"), `${hm(sr)} → ${hm(ss)}`, L("Sunrise → sunset","الشروق ← الغروب")],
+    [L("Moon","القمر"), `${Math.round(m.illum * 100)}%`, moonName(m) + (mr ? L(` · rises ${mr[0]}`, ` · يشرق ${mr[0]}`) + (mr[1] ? L(` · sets ${mr[1]}`, ` · يغرب ${mr[1]}`) : "") : "")]
+  ];
+  $("stats").innerHTML = stats.map(([l, v, s]) => `<div class="stat"><span class="l">${l}</span><span class="v num"><bdi>${esc(v)}</bdi></span><span class="s">${esc(s)}</span></div>`).join("");
+  const src = tideSrc(sel);
+  $("srcLine").innerHTML = esc(src === "bmd"
+    ? L("Official sources: BMD public forecast issued 27 Sep 05:27 · BMD marine areas 05:27 · OBBI METAR 10:00 Bahrain time.","المصادر الرسمية: النشرة العامة للأرصاد 27 سبتمبر 05:27 · توقعات المناطق البحرية 05:27 · قراءة مطار البحرين 10:00.")
+    : (src === "model" ? L("Tides: Tide-Forecast prediction for Mina Salman (allow ±30 min). ","المد: تنبؤات Tide-Forecast لميناء سلمان (بفارق ±30 دقيقة). ") : L("Tides: harmonic estimate for Mina Salman (allow up to ±1 h). ","المد: تقدير توافقي لميناء سلمان (بفارق حتى ±ساعة). "))
+      + (w ? L("Weather: BMD forecast issued 27 Sep 2026.","الطقس: توقعات الأرصاد الصادرة في 27 سبتمبر 2026.") : L("Weather on this page was loaded on 27 Sep 2026. For today's wind and sea state see ","بيانات الطقس في الصفحة محمّلة بتاريخ 27 سبتمبر 2026. لرياح وحالة البحر اليوم راجع ")))
+    + (w || src === "bmd" ? "" : `<a href="https://www.bahrainweather.gov.bh/" target="_blank" rel="noopener">bahrainweather.gov.bh</a>.`);
+  renderChart();
+}
+
+/* ================= CHART ================= */
+function renderChart() {
+  const wrap = $("tideWrap"), svg = $("tideSvg");
+  const W = Math.max(320, Math.round(wrap.clientWidth || 800)); const narrow = W < 560;
+  const H = narrow ? 210 : 240; const P = { l: narrow ? 30 : 38, r: 10, t: 34, b: 26 };
+  const pw = W - P.l - P.r, ph = H - P.t - P.b;
+  const d0 = dayStart(sel), d1 = d0 + DAY; const YMAX = 3.25;
+  const x = t => P.l + (t - d0) / DAY * pw, y = h => P.t + (1 - h / YMAX) * ph;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const [rise, set] = sunTimes(sel); const wins = windowsFor(sel);
+  const top3 = [...wins].sort((a, b) => b.score - a.score).slice(0, 3);
+  const M = L("m","م");
+  let s = `<rect x="${x(d0)}" y="${P.t}" width="${x(rise) - x(d0)}" height="${ph}" style="fill:var(--night)"/><rect x="${x(set)}" y="${P.t}" width="${x(d1) - x(set)}" height="${ph}" style="fill:var(--night)"/>`;
+  for (let m = 0; m <= 3; m++) s += `<line x1="${P.l}" x2="${W - P.r}" y1="${y(m)}" y2="${y(m)}" style="stroke:var(--line)"/><text x="${P.l - 6}" y="${y(m) + 4}" text-anchor="end" font-size="11" style="fill:var(--muted)">${m} ${M}</text>`;
+  top3.forEach(w => { s += `<rect x="${x(w.a)}" y="${P.t}" width="${x(w.b) - x(w.a)}" height="${ph}" style="fill:var(--accent-soft)"/><rect x="${x(w.a)}" y="${P.t}" width="${x(w.b) - x(w.a)}" height="3" style="fill:var(--accent)"/>`; });
+  const step = narrow ? 6 : 3;
+  for (let hh = 0; hh <= 24; hh += step) s += `<text x="${x(d0 + hh * HR)}" y="${H - 6}" text-anchor="${hh === 0 ? "start" : hh === 24 ? "end" : "middle"}" font-size="11" style="fill:var(--muted)">${pad(hh)}:00</text>`;
+  [[rise, "↑"], [set, "↓"]].forEach(([t, a]) => { s += `<text x="${x(t)}" y="${P.t - 20}" text-anchor="middle" font-size="11" font-weight="600" style="fill:var(--muted)">${a} ${hm(t)}</text><line x1="${x(t)}" x2="${x(t)}" y1="${P.t - 14}" y2="${P.t}" style="stroke:var(--muted)"/>`; });
+  let path = "";
+  for (let t = d0; t <= d1; t += 10 * MIN) { const v = tideAt(t); if (v) path += (path ? "L" : "M") + x(t).toFixed(1) + "," + y(v.h).toFixed(1); }
+  s += `<path d="${path}L${x(d1)},${y(0)}L${x(d0)},${y(0)}Z" style="fill:var(--tide-fill)"/><path d="${path}" fill="none" style="stroke:var(--tide)" stroke-width="2.25" stroke-linejoin="round"/>`;
+  dayEvents(sel).forEach(e => {
+    const ex = x(e.t), ey = y(e.h); const anchor = ex < P.l + 40 ? "start" : ex > W - 50 ? "end" : "middle";
+    s += `<circle cx="${ex}" cy="${ey}" r="5" style="fill:var(--tide);stroke:var(--glass-hi)" stroke-width="2.5"/><text x="${ex}" y="${e.k === "H" ? ey - 11 : ey + 20}" text-anchor="${anchor}" font-size="12" font-weight="700" style="fill:var(--ink)">${e.k === "H" ? L("H","مد") : L("L","جزر")} ${hm(e.t)}</text>`;
+  });
+  if (sel === TODAY) {
+    const n = nowMs(); const v = tideAt(n);
+    if (v) s += `<line x1="${x(n)}" x2="${x(n)}" y1="${P.t}" y2="${y(0)}" style="stroke:var(--ink)" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="${x(n)}" cy="${y(v.h)}" r="6" style="fill:var(--accent);stroke:var(--glass-hi)" stroke-width="2.5"/><text x="${x(n) + 6}" y="${P.t - 4}" font-size="11" font-weight="700" style="fill:var(--ink)">${L("NOW","الآن")} ${hm(n)}</text>`;
+  }
+  s += `<line id="hx" x1="0" x2="0" y1="${P.t}" y2="${y(0)}" style="stroke:var(--ink);opacity:0"/><circle id="hd" cx="0" cy="0" r="4.5" style="fill:var(--ink);opacity:0"/><rect id="hit" x="${P.l}" y="0" width="${pw}" height="${H}" fill="transparent" style="cursor:crosshair"/>`;
+  svg.innerHTML = s;
+  svg.setAttribute("aria-label", L(`Tide at Mina Salman on ${longDate(sel)}. `, `المد والجزر في ميناء سلمان يوم ${longDate(sel)}. `) + dayEvents(sel).map(e => `${e.k === "H" ? L("High","مد") : L("Low","جزر")} ${hm(e.t)} ${e.h} ${M}`).join(", "));
+  const hit = svg.querySelector("#hit"), hx = svg.querySelector("#hx"), hd = svg.querySelector("#hd"), tip = $("tideTip");
+  const move = ev => {
+    const r = svg.getBoundingClientRect(); const sx = (ev.clientX - r.left) * (W / r.width);
+    const t = d0 + Math.min(1, Math.max(0, (sx - P.l) / pw)) * DAY; const v = tideAt(t); if (!v) return;
+    hx.setAttribute("x1", x(t)); hx.setAttribute("x2", x(t)); hx.style.opacity = .35; hd.setAttribute("cx", x(t)); hd.setAttribute("cy", y(v.h)); hd.style.opacity = 1;
+    const inWin = wins.find(w => t >= w.a && t <= w.b);
+    tip.textContent = `${hm(t)} · ${v.h.toFixed(2)} ${M} · ${v.rising ? L("rising","صاعد") : L("falling","نازل")}${inWin ? " · " + starTxt(inWin.score) : ""}`;
+    tip.hidden = false; tip.style.left = Math.min(r.width - 90, Math.max(90, x(t) / W * r.width)) + "px"; tip.style.top = (y(v.h) / H * r.height) + "px";
+  };
+  hit.addEventListener("pointermove", move); hit.addEventListener("pointerdown", move);
+  hit.addEventListener("pointerleave", () => { tip.hidden = true; hx.style.opacity = 0; hd.style.opacity = 0; });
+}
+
+/* ================= ADVICE ================= */
+function pickBest(key) {
+  const wins = windowsFor(key); const now = nowMs();
+  if (key === TODAY) {
+    const left = wins.filter(w => w.b > now);
+    if (left.length) return { w: [...left].sort((a, b) => b.score - a.score)[0], label: L("Best window left today","أفضل نافذة متبقية اليوم"), key };
+    const nk = addDays(key, 1);
+    return { w: [...windowsFor(nk)].sort((a, b) => b.score - a.score)[0], label: L("Today's windows are over · best tomorrow","انتهت نوافذ اليوم · الأفضل غداً"), key: nk };
+  }
+  return { w: [...wins].sort((a, b) => b.score - a.score)[0], label: L("Best time to fish","أفضل وقت للصيد"), key };
+}
+function seasonFor(m) {
+  const img = ["hamour", ...IMG_CAL[m]];
+  const gen = FISH.filter(f => !f.img && f.general.includes(m)).map(f => f.id);
+  return { img, gen };
+}
+const labelOf = id => { const f = FISH.find(x => x.id === id); if (f) return { ar: f.ar, tr: f.tr }; const n = NAMES[id]; return { ar: n[0], tr: n[1] }; };
+function renderAdvice() {
+  const { w, label, key } = pickBest(sel);
+  $("bestLbl").textContent = `${label} · ${shortDate(key)}`;
+  $("bestRange").innerHTML = `${hm(w.a)}<span class="dash">–</span>${hm(w.b)}`;
+  $("bestStars").innerHTML = starHTML(w.score);
+  $("bestScore").textContent = `${w.score}/100`;
+  const why = { dawn: L("at first light","مع أول ضوء"), dusk: L("around sunset","قرب الغروب"), night: L("after dark, when heat is off the water","بعد حلول الظلام حين يبرد الماء"), midday: L("in the midday heat, so fish may sit deeper","في حر الظهيرة، فقد تبقى الأسماك في العمق"), day: L("in daylight","في النهار") }[w.light];
+  const flow = w.range >= 1.6 ? L("Strong tidal flow keeps bait moving.","حركة الماء القوية تحرّك الطُعم.") : w.range >= 1.25 ? L("Moderate flow.","حركة ماء متوسطة.") : L("Weak flow, so fish the full window.","حركة ماء ضعيفة، فاستغل النافذة كاملة.");
+  $("bestWhy").textContent = `${stageText(w)}، ${why}. ${flow}`.replace("، ", L(", ", "، "));
+  $("bestChips").innerHTML = reasons(w).map(c => `<li class="chip ${c.g ? "good" : c.s ? "slow" : ""}">${esc(c.t)}</li>`).join("");
+  const now = nowMs();
+  $("altDay").textContent = shortDate(sel);
+  $("altList").innerHTML = windowsFor(sel).map(x => `
+    <div class="alt ${sel === TODAY && x.b < now ? "past" : ""}">
+      <span class="tt num">${hm(x.a)}–${hm(x.b)}</span>
+      <span class="ds">${esc(stageText(x))} · ${lightName(x.light)}</span>
+      <span class="sc">${starTxt(x.score)}</span>
+    </div>`).join("");
+
+  const m = monthOf(sel), nm = m % 12 + 1;
+  const cur = seasonFor(m), nxt = seasonFor(nm);
+  $("seasonTitle").textContent = L(`In season · ${mon(m - 1)}`, `في الموسم · ${mon(m - 1)}`);
+  const chip = (id, gen) => { const n = labelOf(id); const f = FISH.find(x => x.id === id); const st = statusOf(id, sel);
+    return `<span class="fchip ${gen ? "gen" : ""}" title="${gen ? L("General guide","دليل عام") : L("From the fish calendar","من تقويم الأسماك")}"><span class="ar" lang="ar">${n.ar}</span>${lang === "ar" ? "" : esc(n.tr)}${f ? `<span class="sz">${sizeName(f.size)}</span>` : ""}${st.c === "st-ban" ? `<span class="sz" style="background:var(--bad-soft);color:var(--bad)">${L("Closed","محظور")}</span>` : ""}</span>`; };
+  $("seasonNow").innerHTML = cur.img.map(id => chip(id, false)).join("") + cur.gen.map(id => chip(id, true)).join("");
+  const nextIds = [...nxt.img, ...nxt.gen].filter(id => !cur.img.includes(id) && !cur.gen.includes(id));
+  $("seasonNext").textContent = (nextIds.length ? L(`Coming in ${mon(nm - 1)}: `, `في ${mon(nm - 1)}: `) + nextIds.map(id => lang === "ar" ? labelOf(id).ar : labelOf(id).tr).join(L(", ", "، ")) + ". " : "") + L("Solid chips come from the fish calendar image; dashed ones are a general guide.", "الأسماء بإطار كامل من صورة التقويم، وذات الإطار المتقطع دليل عام.");
+
+  const pool = [...new Set([...cur.img, ...cur.gen, ...nxt.img, ...nxt.gen])].map(id => FISH.find(f => f.id === id)).filter(Boolean);
+  const icon = z => { const yy = { surface: 3, mid: 8, bottom: 13, shallow: 8 }[z];
+    return `<svg width="22" height="16" viewBox="0 0 22 16" aria-hidden="true"><path d="M1 2.5 Q6 0.5 11 2.5 T21 2.5" fill="none" style="stroke:var(--tide)" stroke-width="1.6"/><path d="M1 15h20" style="stroke:var(--muted)" stroke-width="1.6"/><circle cx="${z === "shallow" ? 5 : 11}" cy="${yy}" r="2.6" style="fill:var(--accent)"/></svg>`; };
+  $("zones").innerHTML = Object.keys(ZONES).map(z => {
+    const fs = pool.filter(f => f.zone === z); if (!fs.length) return "";
+    return `<div class="zone"><div class="zl">${icon(z)}${zoneName(z)}</div><div class="zf">${fs.map(f => `${fishName(f)} <span class="muted">(${sizeName(f.size)}، ${kg(f.typical)})</span>`.replace("،", L(",", "،"))).join(" · ")}</div><div class="muted" style="font-size:13px">${zoneNote(z)}</div></div>`;
+  }).join("");
+
+  const wx = WX[sel]; const o = OBS[sel]; const wmax = wx ? (wx.strong ? wx.strong[1] : wx.base[1]) : null;
+  const temp = SEA_NORMAL[m - 1]; const moon = moonAt(dayStart(sel) + 21 * HR); const illum = Math.round(moon.illum * 100);
+  const reads = [
+    [L("Water","الماء"), temp >= 30 ? L(`About ${temp} °C and still summer-hot. Fish hold deeper or feed at dawn, dusk and night. Shallow spots improve as it cools.`, `نحو ${temp}° م وما زال حاراً. تبقى الأسماك في العمق أو تتغذى عند الفجر والغروب والليل، وتتحسن المواقع الضحلة مع برودة الماء.`)
+      : temp >= 25 ? L(`About ${temp} °C. Shallow rocks and flats are active.`, `نحو ${temp}° م. الصخور والمسطحات الضحلة نشطة.`) : L(`About ${temp} °C. Cool water: shallow spots fish well through the day.`, `نحو ${temp}° م. ماء بارد، والمواقع الضحلة جيدة طوال النهار.`)],
+    [L("Clarity","الصفاء"), wmax == null ? L("No wind forecast loaded for this day. Calm days mean clear water: use lighter line and natural bait.","لا توجد توقعات رياح لهذا اليوم. الأيام الهادئة تعني ماءً صافياً: استخدم خيطاً أخف وطُعماً طبيعياً.")
+      : wmax <= 12 ? L("Likely clear (estimate from wind and sea state). Use lighter line and natural bait.","غالباً صافٍ (تقدير من الرياح وحالة البحر). استخدم خيطاً أخف وطُعماً طبيعياً.")
+      : wmax <= 17 ? L(`Clear early; wind up to ${wmax} kt can stir shallow water later. A little colour helps.`, `صافٍ في الصباح، وقد تعكّر الرياح (حتى ${wmax} عقدة) المياه الضحلة لاحقاً، وقليل من العكارة مفيد.`) : L("Choppy and stirred up. Pick a sheltered shore.","مضطرب وعكر. اختر ساحلاً محمياً.")],
+    [L("Wind","الرياح"), wmax == null ? L("Check the BMD forecast before going out.","راجع توقعات الأرصاد قبل الخروج.") : wmax <= 12 ? L("Light. Easy handline conditions.","خفيفة. ظروف سهلة للحداق.") : wmax <= 17 ? L(`Up to ${wmax} kt at times. Use a heavier sinker to hold bottom.`, `حتى ${wmax} عقدة أحياناً. استخدم ثقالة أثقل لتثبيت الخيط.`) : L("Strong. Consider another day.","قوية. فكّر في يوم آخر.")],
+    [L("Pressure","الضغط"), o ? L(`${o.pressure} hPa and steady under clear skies. Stable, bright days fish slower, so stick to the tide windows.`, `${o.pressure} هكتوباسكال ومستقر مع سماء صافية. الأيام المستقرة المشمسة أبطأ، فالتزم بنوافذ المد.`) : L("No pressure reading for this day. A falling barometer before a weather change often triggers feeding.","لا توجد قراءة ضغط لهذا اليوم. انخفاض الضغط قبل تغيّر الطقس غالباً يحفّز التغذية.")],
+    [L("Moon","القمر"), illum >= 80 ? L(`${illum}% lit. Bright nights, good for night fishing.`, `مضاء ${illum}%. ليالٍ مضيئة، جيدة للصيد الليلي.`) : illum <= 20 ? L(`${illum}% lit. Dark nights and strong new-moon tides.`, `مضاء ${illum}%. ليالٍ مظلمة ومد قوي قرب المحاق.`) : L(`${illum}% lit. Moderate tides.`, `مضاء ${illum}%. مد متوسط.`)]
+  ];
+  $("reads").innerHTML = reads.map(([k, v]) => `<li><b>${k}</b><span>${esc(v)}</span></li>`).join("");
+}
+
+/* ================= WEEK ================= */
+function moonSVG(k, waxing, size) {
+  const r = size / 2 - 1, c = size / 2, lx = r * Math.abs(2 * k - 1);
+  const limb = waxing ? 1 : 0, term = waxing ? (k > 0.5 ? 1 : 0) : (k > 0.5 ? 0 : 1);
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true"><circle cx="${c}" cy="${c}" r="${r}" style="fill:var(--line)"/><path d="M${c},${c - r} A${r},${r} 0 0 ${limb} ${c},${c + r} A${lx},${r} 0 0 ${term} ${c},${c - r}Z" style="fill:var(--accent)"/></svg>`;
+}
+function renderWeek() {
+  const now = nowMs(); const keys = Array.from({ length: 7 }, (_, i) => addDays(TODAY, i));
+  $("week").innerHTML = keys.map(key => {
+    const p = parts(dayStart(key)); const r = dayRange(key); const w = WX[key]; const src = tideSrc(key);
+    let wins = [...windowsFor(key)].sort((a, b) => b.score - a.score);
+    if (key === TODAY) { const left = wins.filter(x => x.b > now); if (left.length) wins = left; }
+    const [w1, w2] = wins; const m = moonAt(dayStart(key) + 21 * HR);
+    const wind = w ? (w.strong ? `${w.base[0]}–${w.base[1]} ${L("kt","عقدة")}، ${dirTxt(w.strongDir)} ${L("to","حتى")} ${w.strong[1]}` : `${dirTxt(w.baseDir)} ${w.base[0]}–${w.base[1]} ${L("kt","عقدة")}`).replace("،", L(",", "،")) + " · " + ft(w.sea[0]) : L("No wind forecast loaded","لا توجد توقعات رياح");
+    return `<button class="day ${key === sel ? "sel" : ""}" type="button" data-key="${key}" aria-pressed="${key === sel}">
+      <span class="dh"><span><span class="wd">${key === TODAY ? L("Today","اليوم") : (lang === "ar" ? WD.ar[p.wd] : WD.en[p.wd].slice(0, 3))}</span><span class="dt">${p.d} ${monS(p.m - 1)}</span></span>
+        <span class="mn">${moonSVG(m.illum, m.waxing, 22)}${Math.round(m.illum * 100)}%</span></span>
+      <span class="blk"><span class="rng">${strength(r)} · ${r.toFixed(1)} ${L("m","م")}</span><span class="bar"><i style="width:${Math.min(100, r / 2.1 * 100)}%"></i></span></span>
+      <span class="win">
+        <span class="w1 num">${hm(w1.a)}–${hm(w1.b)}</span>
+        <span class="ws">${starTxt(w1.score)}</span>
+        <span class="muted" style="font-size:12.5px">${esc(stageText(w1))}</span>
+        ${w2 ? `<span class="w2 num">${L("Also","أيضاً")} <bdi>${hm(w2.a)}–${hm(w2.b)}</bdi> · <bdi>${starTxt(w2.score)}</bdi></span>` : ""}
+      </span>
+      <span class="wind">${esc(wind)}</span>
+      <span class="src">${srcPill(src).replace(/Official BMD tides|مد وجزر رسمي من الأرصاد/, L("Official","رسمي")).replace(/Predicted tides|مد وجزر متوقع/, L("Predicted","متوقع")).replace(/Estimated tides|مد وجزر تقديري/, L("Estimate","تقديري"))}</span>
+    </button>`;
+  }).join("");
+  $("week").querySelectorAll(".day").forEach(b => b.addEventListener("click", () => { select(b.dataset.key); $("board").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }));
+}
+
+/* ================= FISH ================= */
+function renderFish() {
+  const m = monthOf(sel), nm = m % 12 + 1;
+  const list = fishTab === "season" ? FISH.filter(f => bestMonths(f).includes(m) || bestMonths(f).includes(nm)) : FISH;
+  $("fishGrid").innerHTML = list.map(f => {
+    const st = statusOf(f.id, sel); const bm = bestMonths(f);
+    const when = bm.includes(m) ? `<span class="tag st-open">${L("Best now","موسمه الآن")}</span>` : bm.includes(nm) ? `<span class="tag">${L("From","من")} ${monS(nm - 1)}</span>` : "";
+    const months = bm.length === 12 ? L("All year, high quality","طوال العام، جودة عالية") : bm.map(i => monS(i - 1)).join(L(", ", "، "));
+    const i = lang === "ar" ? 1 : 0;
+    return `<article class="fcard">
+      <div><div class="arn" lang="ar">${f.ar}</div><div class="en">${lang === "ar" ? esc(f.tr) + " · " : esc(f.tr) + " · "}${esc(f.en)}</div><div class="sci">${esc(f.sci)}</div></div>
+      <div class="tags"><span class="tag">${zoneName(f.zone)}</span><span class="tag">${sizeName(f.size)}</span>${when}<span class="tag ${st.c}">${st.t}</span></div>
+      <dl class="facts">
+        <dt>${L("Season","الموسم")}</dt><dd>${months} <span class="muted">· ${f.img ? L("fish calendar","تقويم الأسماك") : L("general guide","دليل عام")}</span></dd>
+        <dt>${L("Typical","المعتاد")}</dt><dd>${kg(f.typical)} <span class="muted">· ${L("max","الأقصى")} ${f.max[i]}</span></dd>
+        <dt>${L("Legal size","الحجم القانوني")}</dt><dd>${f.minLen ? L(`${f.minLen} cm minimum`, `${f.minLen} سم كحد أدنى`) : L("No minimum listed","لا يوجد حد مدرج")}</dd>
+        <dt>${L("Where","المكان")}</dt><dd>${esc(f.habitat[i])}</dd>
+        <dt>${L("Method","الطريقة")}</dt><dd>${esc(f.method[i])}</dd>
+        <dt>${L("Bait","الطُعم")}</dt><dd>${esc(f.bait[i])}</dd>
+      </dl>
+      <p class="tipline">${esc(f.tip[i])}</p>
+      <div class="acts"><button class="btn small ghost ai-fish" type="button" data-id="${f.id}" ${aiReady ? "" : "hidden"}>${L("AI deep dive","شرح مفصل بالذكاء الاصطناعي")}</button><a href="${f.wiki}" target="_blank" rel="noopener">${L("Wikipedia ↗","ويكيبيديا ↗")}</a></div>
+      <div class="ai-out" id="fo-${f.id}" hidden></div>
+    </article>`;
+  }).join("");
+  $("fishGrid").querySelectorAll(".ai-fish").forEach(b => b.addEventListener("click", () => fishAI(b.dataset.id, $("fo-" + b.dataset.id), b)));
+  renderCalendar();
+}
+function renderCalendar() {
+  const m = monthOf(sel);
+  $("allYear").innerHTML = `<span class="ar" lang="ar">هامور</span><span>${L("Hamour · all year: high quality and fat","طوال العام جودة عالية وسمين")}</span>`;
+  $("mgrid").innerHTML = Array.from({ length: 12 }, (_, i) => i + 1).map(mm => {
+    const ids = IMG_CAL[mm];
+    const fish = ids.map(id => { const n = labelOf(id); const closed = BANS.some(b => b.fish.includes(id) && b.type === "full" && banActiveInMonth(b, mm));
+      return `<button class="mf ${closed ? "closed" : ""}" type="button" data-id="${id}" ${aiReady ? "" : "disabled"} title="${closed ? L("Closed season in this month","حظر صيد في هذا الشهر") : ""}"><span class="ar" lang="ar">${n.ar}</span>${lang === "ar" ? "" : `<span>${esc(n.tr)}</span>`}${MINLEN[id] ? `<span class="muted" style="font-size:11px">≥${MINLEN[id]}${L("cm","سم")}</span>` : ""}</button>`; }).join("");
+    return `<div class="mcell ${mm === m ? "cur" : ""}"><div class="mh"><span class="mn">${mon(mm - 1)}</span><span class="mi num">${mm}</span></div><div class="mfish">${fish}</div></div>`;
+  }).join("");
+  $("mgrid").querySelectorAll(".mf").forEach(b => b.addEventListener("click", () => { if (aiReady) { $("calAi").scrollIntoView({ block: "nearest" }); fishAI(b.dataset.id, $("calAi"), b); } }));
+  $("calTapNote").hidden = !aiReady;
+}
+$("tabSeason").onclick = () => { fishTab = "season"; $("tabSeason").setAttribute("aria-selected", "true"); $("tabAll").setAttribute("aria-selected", "false"); renderFish(); };
+$("tabAll").onclick = () => { fishTab = "all"; $("tabAll").setAttribute("aria-selected", "true"); $("tabSeason").setAttribute("aria-selected", "false"); renderFish(); };
+
+/* ================= RULES ================= */
+function renderRules() {
+  const key = TODAY; const active = BANS.filter(b => banActive(b, key));
+  const y = parts(nowMs()).y;
+  const fmtMD = ([mm, dd]) => `${dd} ${mon(mm - 1)}`;
+  $("activeBan").innerHTML = active.length ? active.map(b => {
+    const end = toMs(`${y}-${pad(b.to[0])}-${pad(b.to[1])}`, "00:00"); const left = Math.max(0, Math.round((end - dayStart(key)) / DAY));
+    const title = b.type === "net" ? L("Kingfish: no nets until 15 Oct","الكنعد: لا شباك حتى 15 أكتوبر") : L(`${b.name[0]}: closed until ${fmtMD(b.to)}`, `${b.name[1]}: محظور حتى ${fmtMD(b.to)}`);
+    const body = b.type === "net" ? L(`Hook and line fishing for kanaad is allowed, so handlines are fine. Nets are banned for ${left} more day${left === 1 ? "" : "s"}. Any kingfish caught in a net must be released alive.`, `صيد الكنعد بالخيط (الحداق) مسموح. الشباك ممنوعة لمدة ${left} يوماً أخرى، ويجب إطلاق أي كنعد يعلق في الشباك حياً.`)
+      : L("No catching, selling or trading. Release any catch.","يمنع الصيد والبيع والتداول، ويجب إطلاق أي صيد.");
+    return `<div class="active ${b.type === "full" ? "full" : ""}"><span class="pill ${b.type === "full" ? "" : "model"}" style="align-self:flex-start">${L("In force now","ساري الآن")}</span><div class="big">${title}</div><p>${body}</p></div>`;
+  }).join("") : `<div class="active none"><div class="big">${L("No seasonal ban in force","لا يوجد حظر موسمي حالياً")}</div><p>${L("Minimum sizes below still apply all year.","الحد الأدنى للأحجام أدناه ساري طوال العام.")}</p></div>`;
+  const y0 = Date.UTC(y, 0, 1) - OFF, y1 = Date.UTC(y + 1, 0, 1) - OFF; const pct = t => ((t - y0) / (y1 - y0) * 100);
+  const nowX = pct(nowMs()).toFixed(2);
+  $("gantt").innerHTML = `<h3>${L(`Closed seasons ${y}`, `مواسم الحظر ${y}`)}</h3>` + BANS.map(b => {
+    const a = pct(Date.UTC(y, b.from[0] - 1, b.from[1]) - OFF), e = pct(Date.UTC(y, b.to[0] - 1, b.to[1] + 1) - OFF);
+    return `<div class="grow"><span>${L(b.name[0], b.name[1])}</span><div class="gtrack"><div class="gseg ${b.type}" style="left:${a.toFixed(2)}%;width:${(e - a).toFixed(2)}%"></div><div class="gnow" style="left:${nowX}%"></div></div></div>`;
+  }).join("") + `<div class="gmonths"><div></div><div>${MON[lang].map(n => `<span>${lang === "ar" ? n.slice(0, 2) : n[0]}</span>`).join("")}</div></div>
+    <div class="legend" style="margin-top:4px"><span><i style="background:var(--bad)"></i>${L("Full ban","حظر كامل")}</span><span><i style="background:repeating-linear-gradient(135deg,var(--warn) 0 4px,transparent 4px 8px);border:1px solid var(--warn)"></i>${L("Nets only","الشباك فقط")}</span><span><i style="background:var(--ink);width:2px"></i>${L("Today","اليوم")}</span></div>
+    <p class="subnote">${L("Dates as announced by the SCE for 2026. The council confirms them each year.","التواريخ كما أعلنها المجلس لعام 2026، ويؤكدها سنوياً.")}</p>`;
+  $("sizes").innerHTML = SIZES.map(([a, e, cm]) => `<div class="size"><span class="ar" lang="ar">${a}${lang === "ar" ? "" : `<small>${e}</small>`}</span><b class="num">${cm} ${L("cm","سم")}</b></div>`).join("");
+  $("news").innerHTML = NEWS.map(n => `<li><time>${L(n.d[0], n.d[1])}</time><span>${esc(L(n.t[0], n.t[1]))} <a href="${n.u}" target="_blank" rel="noopener">${n.s} ↗</a></span></li>`).join("");
+}
+
+/* ================= RENDER ================= */
+function select(key) { sel = key; renderAll(); }
+function renderAll() { applyStatic(); renderHeader(); renderAdvice(); renderWeek(); renderFish(); renderRules(); setAIState(); }
+$("langBtn").addEventListener("click", () => { lang = lang === "ar" ? "en" : "ar"; try { localStorage.setItem(LANG_KEY, lang); } catch (_) {} renderAll(); });
+let rT; addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(renderChart, 120); });
+setInterval(() => {
+  const k = keyOf(nowMs());
+  if (k !== TODAY) { const wasToday = sel === TODAY; TODAY = k; if (wasToday) sel = k; renderAll(); }
+  else if (sel === TODAY) { renderHeader(); renderAdvice(); }
+}, 60000);
+
+/* ================= AI ================= */
+let aiMsg = null;
+function setAIState() {
+  $("aiGo").disabled = !aiReady;
+  if (aiMsg) $("aiState").textContent = L(aiMsg[0], aiMsg[1]);
+  else $("aiState").textContent = aiReady ? L("Uses your Claude account. Deep analysis takes up to a minute.","يستخدم حسابك في Claude. التحليل العميق قد يستغرق دقيقة.") : L("Connecting to Claude…","جارٍ الاتصال بـ Claude…");
+}
+function conditionsText(key) {
+  const d0 = dayStart(key); const w = WX[key]; const o = OBS[key]; const [sr, ss] = sunTimes(key); const m = moonAt(d0 + 21 * HR);
+  const ev = dayEvents(key).map(e => `${e.k === "H" ? "High" : "Low"} ${hm(e.t)} (${e.h} m, ${e.src === "bmd" ? "official BMD" : e.src === "model" ? "predicted" : "harmonic estimate"})`).join("; ");
+  return [
+    `Date: ${key}`,
+    `Tides at Mina Salman: ${ev}. Day range ${dayRange(key).toFixed(2)} m.`,
+    `Sun ${hm(sr)}–${hm(ss)}. Moon ${Math.round(m.illum * 100)}% lit, ${m.waxing ? "waxing" : "waning"}.`,
+    w ? `Weather (BMD): ${w.en}. Wind ${w.baseDir} ${w.base[0]}–${w.base[1]} kt${w.strong ? `, ${w.strongDir}'ly ${w.strong[0]}–${w.strong[1]} kt at times ${w.when === "afternoon" ? "in the afternoon" : "during the day"}` : ""}. Sea ${w.sea.join(" inshore, ")}${w.sea[1] ? " offshore" : ""}.${w.tmax ? ` Air ${w.tmax}/${w.tmin} °C, humidity ${w.rh[0]}–${w.rh[1]}%.` : ""}` : "No weather forecast loaded for this day.",
+    o ? `Observed: pressure ${o.pressure} hPa, steady; visibility ${o.vis}; clear skies.` : "",
+    `Sea temperature: about ${SEA_NORMAL[monthOf(key) - 1]} °C (monthly normal).`
+  ].filter(Boolean).join("\n");
+}
+const windowsText = key => windowsFor(key).map(w => `- ${hm(w.a)}–${hm(w.b)}: ${w.side === "into" ? "into" : "after"} the ${hm(w.e.t)} ${w.e.k === "H" ? "high" : "low"}; ${w.light}; wind ${w.maxKt == null ? "unknown" : "up to " + w.maxKt + " kt"}; score ${w.score}/100`).join("\n");
+const weekText = () => Array.from({ length: 7 }, (_, i) => addDays(TODAY, i)).map(k => { const b = [...windowsFor(k)].sort((a, c) => c.score - a.score)[0]; return `- ${k}: best ${hm(b.a)}–${hm(b.b)} (${b.score}/100), range ${dayRange(k).toFixed(1)} m`; }).join("\n");
+const calText = m => { const s = seasonFor(m); return `Fish calendar image (Captain Al-Busmait) for month ${m}: ${s.img.map(id => labelOf(id).ar + " (" + labelOf(id).tr + ")").join(", ")}. General-guide fish: ${s.gen.map(id => labelOf(id).tr).join(", ") || "none"}.`; };
+const fishFacts = f => `${f.tr} (${f.ar}, ${f.en}, ${f.sci}): zone ${ZONES[f.zone][0][0]}; typical ${f.typical[0]}–${f.typical[1]} kg; max ${f.max[0]}; legal minimum ${f.minLen ? f.minLen + " cm" : "none listed"}; habitat ${f.habitat[0]}; method ${f.method[0]}; bait ${f.bait[0]}.`;
+function langRule() {
+  return lang === "ar" ? "اكتب الإجابة كاملة باللغة العربية الواضحة، واستخدم أسماء الأسماك المحلية في البحرين، واستخدم كلمة «حداق» للصيد بالخيط اليدوي." : "Write in clear English. Give local fish names in English letters with the Arabic name in brackets once.";
+}
+function planPrompt() {
+  const key = sel; const m = monthOf(key), nm = m % 12 + 1;
+  const style = STYLE_OPTS.find(o => o[0] === $("aiStyle").value)[3], spot = SPOT_OPTS.find(o => o[0] === $("aiSpot").value)[3];
+  const ids = [...new Set([...seasonFor(m).img, ...seasonFor(m).gen, ...seasonFor(nm).img, ...seasonFor(nm).gen])];
+  const heads = lang === "ar" ? ["أفضل وقت للصيد","الأسماك المستهدفة","قراءة البحر","أفضل أيام الأسبوع","الأنظمة والسلامة"] : ["Best time to fish","Target fish","Reading the water","Best days this week","Rules and safety"];
+  return `You are an expert fishing guide for Bahrain's waters in the Arabian Gulf. Think carefully and weigh every factor before you write.
+
+ANGLER: ${style}. FISHING FROM: ${spot}.
+Current Bahrain time: ${hm(nowMs())} on ${TODAY}. Plan is for: ${key}.
+
+CONDITIONS
+${conditionsText(key)}
+
+TIDE WINDOWS (30–120 min either side of each high or low, slack water left out; scored for tide range, light, wind and moon)
+${windowsText(key)}
+
+WEEK AHEAD
+${weekText()}
+
+SEASON
+${calText(m)}
+${calText(nm)}
+Species facts: ${ids.map(id => FISH.find(f => f.id === id)).filter(Boolean).map(fishFacts).join(" | ")}
+
+RULES
+${BANS.map(b => `- ${b.name[0]}: ${b.type === "net" ? "nets banned" : "fully closed"} ${b.from[1]}/${b.from[0]} – ${b.to[1]}/${b.to[0]}${banActive(b, key) ? " (IN FORCE on this date)" : ""}`).join("\n")}
+- Minimum sizes (SCE Resolution 3/2025): ${SIZES.map(s => s[0] + " " + s[2] + " cm").join(", ")}.
+
+TASK
+Write a practical plan using these exact section headings:
+## ${heads[0]}
+Pick one or two time ranges from the windows${key === TODAY ? " that have not passed yet" : ""}. Two or three bullets on why.
+## ${heads[1]}
+3–4 fish ranked for this angler, spot and month. For each: depth zone (surface / mid-water / bottom), method (jig, cast, bottom handline or float), a handline rig${/rod/i.test(style) ? " and a simple beginner rod setup" : ""} (line strength, hook size, sinker or jig weight), bait, and typical weight. Skip any fish in a closed season.
+## ${heads[2]}
+Water temperature and clarity, wind, pressure and moon.
+## ${heads[3]}
+The 2 best days and why.
+## ${heads[4]}
+Legal sizes for the fish you picked, bans in force, heat safety.
+
+Under 420 words, bullets. Use only the times and facts given; do not invent tide times, regulations or place names.
+${langRule()}`;
+}
+function fishPrompt(id) {
+  const f = FISH.find(x => x.id === id); const n = labelOf(id); const key = sel;
+  const months = f ? bestMonths(f) : imgMonths(id);
+  const best = [...windowsFor(key)].sort((a, b) => b.score - a.score).slice(0, 3).map(w => `${hm(w.a)}–${hm(w.b)}`).join("; ");
+  const style = STYLE_OPTS.find(o => o[0] === $("aiStyle").value)[3], spot = SPOT_OPTS.find(o => o[0] === $("aiSpot").value)[3];
+  const heads = lang === "ar" ? ["المكان والوقت","الطريقة والعُدّة","الطُعم","الحجم والوزن","التعامل والأنظمة"] : ["Where and when","Method and rig","Bait and lures","Size and weight","Handling and rules"];
+  return `You are an expert Bahrain angler. Give a deep-dive on catching this fish in Bahrain waters.
+
+FISH: local Bahraini name ${n.ar} (${n.tr}).${f ? " Known facts: " + fishFacts(f) : " If you are not sure which species this Bahraini name refers to, say so in one line and give general advice."}
+Good months (fish calendar${f && !f.img ? ", general guide" : " image"}): ${months.map(i => MON.en[i - 1]).join(", ")}.
+Legal minimum: ${MINLEN[id] || (f && f.minLen) ? (MINLEN[id] || f.minLen) + " cm" : "none listed"}. Status on ${key}: ${statusOf(id, key).t}.
+ANGLER: ${style}. FISHING FROM: ${spot}.
+CONDITIONS
+${conditionsText(key)}
+Top tide windows: ${best}
+
+Sections with these ## headings: ${heads.join(" · ")}. Under 230 words, bullets, no invented regulations.
+${langRule()}`;
+}
+function renderMD(el, text) {
+  el.innerHTML = ""; el.dir = lang === "ar" ? "rtl" : "ltr"; let list = null;
+  const inline = (parent, s) => s.split(/(\*\*[^*]+\*\*)/g).forEach(part => {
+    if (/^\*\*[^*]+\*\*$/.test(part)) { const b = document.createElement("strong"); b.textContent = part.slice(2, -2); parent.append(b); }
+    else if (part) parent.append(document.createTextNode(part.replace(/(^|\s)\*([^*]+)\*/g, "$1$2")));
+  });
+  text.split("\n").forEach(raw => {
+    const line = raw.trimEnd(); let m;
+    if (!line.trim()) { list = null; return; }
+    if ((m = line.match(/^\s*#{1,4}\s+(.*)$/))) { list = null; const h = document.createElement("h4"); inline(h, m[1]); el.append(h); return; }
+    if ((m = line.match(/^\s*(?:[-*•]|\d+[.)])\s+(.*)$/))) { if (!list) { list = document.createElement(/^\s*\d/.test(line) ? "ol" : "ul"); el.append(list); } const li = document.createElement("li"); inline(li, m[1]); list.append(li); return; }
+    list = null; const p = document.createElement("p"); inline(p, line); el.append(p);
+  });
+}
+const ERR = {
+  not_granted: ["Claude access was not allowed for this page.","لم يُسمح لهذه الصفحة باستخدام Claude."], sampling_disabled: ["Claude isn't available on this account.","Claude غير متاح لهذا الحساب."],
+  rate_limited: ["Too many requests right now. Try again in a minute.","طلبات كثيرة الآن. حاول بعد دقيقة."], session_expired: ["Sign in to Claude again, then retry.","سجّل الدخول إلى Claude مجدداً ثم أعد المحاولة."],
+  refused: ["Claude declined this request. Try a different option.","رفض Claude هذا الطلب. جرّب خياراً آخر."], empty_completion: ["No answer came back. Try again.","لم تصل إجابة. حاول مجدداً."],
+  upstream_error: ["The answer was interrupted. Try again.","انقطعت الإجابة. حاول مجدداً."]
+};
+const errTxt = c => { const e = ERR[c] || ERR.upstream_error; return L(e[0], e[1]); };
+const HIDE = ["not_granted","sampling_disabled","not_declared","capability_disabled","capability_removed"];
+function thinking(el, msg) { el.hidden = false; el.dir = lang === "ar" ? "rtl" : "ltr"; el.innerHTML = `<span class="thinking"><i></i>${esc(msg)}</span>`; }
+async function runPlan() {
+  if (!sample) return;
+  const out = $("aiOut"), go = $("aiGo"), stop = $("aiStop"), st = $("aiState");
+  aiCtl = new AbortController(); go.disabled = true; stop.hidden = false;
+  thinking(out, L("Weighing tides, light, wind, moon and season…","أوازن المد والضوء والرياح والقمر والموسم…"));
+  try {
+    const res = await sample(planPrompt(), { modelTier: "complex", signal: aiCtl.signal, onText: ({ text }) => renderMD(out, text) });
+    st.textContent = res.truncated ? L("The answer was cut short. Try again.","انقطعت الإجابة. حاول مجدداً.") : L(`Plan for ${longDate(sel)}.`, `خطة ليوم ${longDate(sel)}.`);
+  } catch (e) {
+    if (e && e.text) renderMD(out, e.text); else if (!e || e.code !== "cancelled") out.hidden = true;
+    if (e && HIDE.includes(e.code)) disableAI(ERR[e.code] || ["The AI plan isn't available here.","الخطة الذكية غير متاحة هنا."]);
+    else st.textContent = e && e.code === "cancelled" ? L("Stopped.","تم الإيقاف.") : errTxt(e && e.code);
+  } finally { go.disabled = !aiReady; stop.hidden = true; }
+}
+async function fishAI(id, out, btn) {
+  if (!sample) return; btn.disabled = true;
+  thinking(out, L(`Working out ${labelOf(id).tr}…`, `أجهّز شرح ${labelOf(id).ar}…`));
+  try { await sample(fishPrompt(id), { modelTier: "default", onText: ({ text }) => renderMD(out, text) }); }
+  catch (e) {
+    if (e && e.text) renderMD(out, e.text); else { out.dir = lang === "ar" ? "rtl" : "ltr"; out.textContent = errTxt(e && e.code); }
+    if (e && HIDE.includes(e.code)) disableAI(ERR[e.code] || ["The AI plan isn't available here.","الخطة الذكية غير متاحة هنا."]);
+  } finally { btn.disabled = !aiReady; }
+}
+function disableAI(msg) { aiReady = false; aiMsg = msg; setAIState(); document.querySelectorAll(".ai-fish").forEach(b => b.hidden = true); document.querySelectorAll(".mf").forEach(b => b.disabled = true); $("calTapNote").hidden = true; }
+$("aiGo").addEventListener("click", runPlan);
+$("aiStop").addEventListener("click", () => aiCtl && aiCtl.abort());
+
+renderAll();
+(async () => {
+  try { sample = window.claude && window.claude.use ? await window.claude.use("sample") : null; } catch (_) { sample = null; }
+  if (!sample) { disableAI(["The AI plan works only in the Claude version of this page. Everything else works here.","الخطة الذكية تعمل فقط في نسخة الصفحة داخل Claude، وباقي الصفحة يعمل هنا."]); return; }
+  aiReady = true; aiMsg = null; setAIState(); renderFish();
+})();
+
+/* ================= SEA BACKGROUND ================= */
+const cv = $("sea"), ctx = cv.getContext("2d");
+let Wc = 0, Hc = 0, col = {}, glints = [];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+function readColors() { const cs = getComputedStyle(document.documentElement); ["--sky1","--sky2","--sea1","--sea2","--sea3","--glow","--orb","--glitter"].forEach(k => col[k] = cs.getPropertyValue(k).trim()); }
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5); Wc = innerWidth; Hc = innerHeight;
+  cv.width = Math.round(Wc * dpr); cv.height = Math.round(Hc * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  glints = Array.from({ length: Math.round(Wc / 9) }, () => ({ u: Math.random(), v: Math.random(), p: Math.random() * 6.28, s: .6 + Math.random() * 1.6 }));
+}
+function draw(t) {
+  const hz = Hc * 0.26, ox = Wc * 0.74;
+  let g = ctx.createLinearGradient(0, 0, 0, hz); g.addColorStop(0, col["--sky1"]); g.addColorStop(1, col["--sky2"]); ctx.fillStyle = g; ctx.fillRect(0, 0, Wc, hz + 1);
+  const rg = ctx.createRadialGradient(ox, hz, 0, ox, hz, Math.max(Wc, Hc) * .45); rg.addColorStop(0, col["--glow"]); rg.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = rg; ctx.fillRect(0, 0, Wc, hz + 1);
+  ctx.fillStyle = col["--orb"]; ctx.beginPath(); ctx.arc(ox, hz - Hc * .09, Math.max(14, Math.min(Wc, Hc) * .032), 0, 6.2832); ctx.fill();
+  g = ctx.createLinearGradient(0, hz, 0, Hc); g.addColorStop(0, col["--sea1"]); g.addColorStop(.45, col["--sea2"]); g.addColorStop(1, col["--sea3"]); ctx.fillStyle = g; ctx.fillRect(0, hz, Wc, Hc - hz);
+  const glc = col["--glitter"];
+  for (let i = 0; i < 14; i++) {
+    const f = i / 13, yb = hz + (Hc - hz) * Math.pow(f, 1.7) + 4, amp = 1 + f * 7, len = 60 + f * 260, sp = (0.15 + f * .5) * t / 1000;
+    ctx.beginPath();
+    for (let xx = 0; xx <= Wc + 20; xx += 12) { const yy = yb + Math.sin(xx / len * 6.2832 + sp + i * 1.7) * amp + Math.sin(xx / (len * .37) - sp * 1.3 + i) * amp * .35; xx ? ctx.lineTo(xx, yy) : ctx.moveTo(xx, yy); }
+    ctx.strokeStyle = `rgba(${glc},${0.05 + f * 0.09})`; ctx.lineWidth = 1 + f * 1.4; ctx.stroke();
+  }
+  for (const q of glints) {
+    const yy = hz + 3 + Math.pow(q.v, 1.5) * (Hc - hz) * .9, spread = 14 + (yy - hz) * .55;
+    const xx = ox + (q.u - .5) * 2 * spread + Math.sin(t / 900 + q.p) * 4, a = Math.max(0, Math.sin(t / 420 * q.s + q.p)) * (1 - q.v * .7) * .75;
+    if (a < .05) continue; ctx.fillStyle = `rgba(${glc},${a.toFixed(3)})`; ctx.fillRect(xx, yy, 3 + (yy - hz) * .025, 1.2 + (yy - hz) * .004);
+  }
+}
+let last = 0, raf = 0;
+function loop(t) { raf = requestAnimationFrame(loop); if (document.hidden || t - last < 33) return; last = t; draw(t); }
+function start() { cancelAnimationFrame(raf); readColors(); resize(); if (reduce.matches) draw(0); else raf = requestAnimationFrame(loop); }
+start();
+addEventListener("resize", () => { resize(); if (reduce.matches) draw(0); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { readColors(); if (reduce.matches) draw(0); });
+reduce.addEventListener("change", start);
+new MutationObserver(() => { readColors(); if (reduce.matches) draw(0); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+})();
+</script>
+
+</body>
+</html>
